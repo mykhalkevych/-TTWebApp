@@ -5,23 +5,23 @@ import { AppRoutingModule } from './app-routing.module';
 import { AppComponent } from './app.component';
 import { HomeComponent } from './pages/home/home.component';
 import { StoreModule } from '@ngrx/store';
-import { HeaderComponent } from './shared/components/header/header.component';
 import { SharedModule } from './shared/shared.module';
 
 import { AngularFireModule } from '@angular/fire';
 import { environment } from '../environments/environment';
+import { AngularFireAuthModule } from '@angular/fire/auth';
 
 @NgModule({
   declarations: [
     AppComponent,
-    HomeComponent,
-    HeaderComponent
+    HomeComponent
   ],
   imports: [
     BrowserModule,
     AngularFireModule.initializeApp(environment.firebase),
+    AngularFireAuthModule,
+    SharedModule,
     AppRoutingModule,
-    SharedModule
     // StoreModule.forRoot(<Reducers>, {
     //   initialState: {
 
