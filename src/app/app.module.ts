@@ -7,6 +7,10 @@ import { HomeComponent } from './pages/home/home.component';
 import { StoreModule } from '@ngrx/store';
 import { HeaderComponent } from './shared/components/header/header.component';
 import { SharedModule } from './shared/shared.module';
+
+import { AngularFireModule } from '@angular/fire';
+import { environment } from '../environments/environment';
+
 @NgModule({
   declarations: [
     AppComponent,
@@ -15,6 +19,7 @@ import { SharedModule } from './shared/shared.module';
   ],
   imports: [
     BrowserModule,
+    AngularFireModule.initializeApp(environment.firebase),
     AppRoutingModule,
     SharedModule
     // StoreModule.forRoot(<Reducers>, {

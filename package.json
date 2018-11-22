@@ -3,8 +3,8 @@
   "version": "0.0.0",
   "scripts": {
     "ng": "ng",
-    "start": "ng serve",
-    "build": "ng build",
+    "start": "ng serve --port=4300 --open",
+    "build": "ng build --configuration=production",
     "test": "ng test",
     "lint": "ng lint",
     "e2e": "ng e2e"
@@ -15,6 +15,7 @@
     "@angular/common": "~7.0.0",
     "@angular/compiler": "~7.0.0",
     "@angular/core": "~7.0.0",
+    "@angular/fire": "^5.1.0",
     "@angular/forms": "~7.0.0",
     "@angular/http": "~7.0.0",
     "@angular/platform-browser": "~7.0.0",
@@ -22,6 +23,7 @@
     "@angular/router": "~7.0.0",
     "@ngrx/store": "^6.1.2",
     "core-js": "^2.5.4",
+    "firebase": "^5.5.9",
     "rxjs": "~6.3.3",
     "zone.js": "~0.8.26"
   },

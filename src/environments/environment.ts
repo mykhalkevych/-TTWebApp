@@ -3,7 +3,15 @@
 // The list of file replacements can be found in `angular.json`.
 
 export const environment = {
-  production: false
+  production: false,
+  firebase: {
+    apiKey: 'AIzaSyBq3z2rbstjEC4E2p6bBf2pwFZAJJwrwFI',
+    authDomain: 'tabletenis-b5307.firebaseapp.com',
+    databaseURL: '<your-database-URL>',
+    projectId: 'tabletenis-b5307',
+    storageBucket: '<your-storage-bucket>',
+    messagingSenderId: '<your-messaging-sender-id>'
+  }
 };
 
 /*
