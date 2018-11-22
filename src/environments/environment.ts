@@ -7,10 +7,10 @@ export const environment = {
   firebase: {
     apiKey: 'AIzaSyBq3z2rbstjEC4E2p6bBf2pwFZAJJwrwFI',
     authDomain: 'tabletenis-b5307.firebaseapp.com',
-    databaseURL: '<your-database-URL>',
+    databaseURL: 'https://tabletenis-b5307.firebaseio.com',
     projectId: 'tabletenis-b5307',
-    storageBucket: '<your-storage-bucket>',
-    messagingSenderId: '<your-messaging-sender-id>'
+    storageBucket: 'tabletenis-b5307.appspot.com',
+    messagingSenderId: '860159471432'
   }
 };
 
