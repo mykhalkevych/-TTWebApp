@@ -1,5 +1,10 @@
 import { Component, OnInit } from '@angular/core';
-import { AuthService } from 'src/app/services/auth/auth.service';
+import { Store } from '@ngrx/store';
+import { AppState, selectAuthState } from 'src/app/store/app.states';
+import { SignUp, LogIn, LogOut } from 'src/app/store/actions/auth.action';
+import * as auth from 'src/app/store/reducers/auth.reducer';
+
+
 
 @Component({
   selector: 'app-header',
@@ -8,21 +13,26 @@ import { AuthService } from 'src/app/services/auth/auth.service';
 })
 export class HeaderComponent implements OnInit {
 
+  isUserLoggedIn = false;
+
   constructor(
-    private authService: AuthService
+    private store: Store<AppState>
   ) { }
 
   ngOnInit() {
+    this.store.select(selectAuthState)
+      .subscribe((res: auth.State) => {
+        console.log(res);
+        this.isUserLoggedIn = res.isAuthenticated;
+      });
   }
 
   singUp() {
     const authUser = {
-      email: '32ds453@asd.com',
+      email: 'sdgf@asd.com',
       password: '12345678'
     };
-    this.authService.signUp(authUser).then(res => {
-      console.log(res);
-    });
+    this.store.dispatch(new SignUp(authUser));
   }
 
   login() {
@@ -30,14 +40,12 @@ export class HeaderComponent implements OnInit {
       email: '32ds453@asd.com',
       password: '12345678'
     };
-    this.authService.login(authUser)
-    .then(res => {
-      console.log(res);
-    });
+    this.store.dispatch(new LogIn(authUser));
+
   }
 
   logout() {
-    this.authService.logout();
+    this.store.dispatch(new LogOut());
   }
 
 }

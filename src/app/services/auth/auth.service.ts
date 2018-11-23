@@ -27,11 +27,7 @@ export class AuthService {
   }
 
   isLoggedIn() {
-    if (this.userDetails == null) {
-      return false;
-    } else {
-      return true;
-    }
+    return !!localStorage.getItem('token');
   }
 
   signUp(authData) {

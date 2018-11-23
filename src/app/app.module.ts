@@ -12,6 +12,9 @@ import { AngularFireModule } from '@angular/fire';
 import { environment } from '../environments/environment';
 import { AngularFireAuthModule } from '@angular/fire/auth';
 import { MaterialModule } from './shared/material.module';
+import { reducers } from './store/app.states';
+import { EffectsModule } from '@ngrx/effects';
+import { AuthEffects } from './store/effects/auth.effects';
 
 @NgModule({
   declarations: [
@@ -27,11 +30,8 @@ import { MaterialModule } from './shared/material.module';
     MaterialModule,
     SharedModule,
     AppRoutingModule,
-    // StoreModule.forRoot(<Reducers>, {
-    //   initialState: {
-
-    //   }
-    // })
+    StoreModule.forRoot(reducers, {}),
+    EffectsModule.forRoot([AuthEffects])
   ],
   providers: [],
   bootstrap: [AppComponent]

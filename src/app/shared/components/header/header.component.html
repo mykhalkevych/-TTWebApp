@@ -1,7 +1,6 @@
 <p>
   header works!
 </p>
-<button (click)="login()">login</button>
-<button (click)="singUp()">sing up</button>
-<button (click)="logout()">logout</button>
-<button mat-raised-button color="primary">Primary</button>
+<button mat-raised-button color="primary" *ngIf="!isUserLoggedIn" (click)="login()">login</button>
+<button mat-raised-button color="primary" *ngIf="!isUserLoggedIn" (click)="singUp()">sing up</button>
+<button mat-raised-button color="primary" *ngIf="isUserLoggedIn" (click)="logout()">logout</button>
