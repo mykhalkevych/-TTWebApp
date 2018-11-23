@@ -15,13 +15,29 @@ export class HeaderComponent implements OnInit {
   ngOnInit() {
   }
 
-  login() {
+  singUp() {
     const authUser = {
-      email: 'test@test.com',
+      email: '32ds453@asd.com',
       password: '12345678'
     };
-    console.log(this.authService.login(authUser));
-    
+    this.authService.signUp(authUser).then(res => {
+      console.log(res);
+    });
+  }
+
+  login() {
+    const authUser = {
+      email: '32ds453@asd.com',
+      password: '12345678'
+    };
+    this.authService.login(authUser)
+    .then(res => {
+      console.log(res);
+    });
+  }
+
+  logout() {
+    this.authService.logout();
   }
 
 }
