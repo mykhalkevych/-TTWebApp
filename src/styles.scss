@@ -1,8 +1,16 @@
 /* You can add global styles to this file, and also import other style files */
-@import '../node_modules/reset-css/reset.css';
+@import "../node_modules/reset-css/reset.css";
 @import "~@angular/material/prebuilt-themes/indigo-pink.css";
-@import '../node_modules/bootstrap/dist/css/bootstrap-grid.css';
+@import "../node_modules/bootstrap/dist/css/bootstrap-grid.css";
 
-body{
-    font-family: 'Roboto', sans-serif;
+html,
+body {
+  height: 100%;
+}
+body {
+  font-family: "Roboto", sans-serif;
+}
+a {
+  text-decoration: none;
+  color: inherit;
 }
