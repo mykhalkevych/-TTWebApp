@@ -1,7 +1,7 @@
 <div class="header">
   <mat-toolbar class="mat-toolbar" color="primary">
-    <mat-toolbar-row class="justify-content-between">
-      <button (click)="drawer.toggle()" mat-flat-button color="primary">
+    <mat-toolbar-row class="justify-content-between" *ngIf="!isUserLoggedIn">
+      <button (click)="sidenavRef.toggle()" mat-flat-button color="primary">
         <mat-icon>menu</mat-icon>
       </button>
       <div>
@@ -12,25 +12,15 @@
       </div>
     </mat-toolbar-row>
 
-    <mat-toolbar-row class="justify-content-between" *ngIf="false">
-      <button
-        (click)="drawer.toggle()"
-        class="hamburger"
-        mat-flat-button
-        color="primary"
-      >
+    <mat-toolbar-row class="justify-content-between" *ngIf="isUserLoggedIn">
+      <button (click)="sidenavRef.toggle()" class="hamburger" mat-flat-button color="primary">
         <mat-icon>menu</mat-icon>
       </button>
       <div>
         <button mat-flat-button color="primary" (click)="logout()">
           Logout
         </button>
-        <button
-          class="user"
-          mat-flat-button
-          color="primary"
-          [matMenuTriggerFor]="userMenu"
-        >
+        <button class="user" mat-flat-button color="primary" [matMenuTriggerFor]="userMenu">
           <mat-icon>person</mat-icon>
           <mat-menu #userMenu="matMenu">
             <button mat-menu-item>Item 1</button>
@@ -41,23 +31,3 @@
     </mat-toolbar-row>
   </mat-toolbar>
 </div>
-
-<mat-drawer-container class="main" [hasBackdrop]="true">
-  <mat-drawer #drawer class="sidenav" mode="over">
-    <div class="main-menu">
-      <button>Item 1</button>
-      <button>Item 1</button>
-      <button>Item 1</button>
-      <button>Item 1</button>
-    </div>
-  </mat-drawer>
-
-  <div class="sidenav-content">
-    <section>
-      Lorem ipsum, dolor sit amet consectetur adipisicing elit. Earum libero
-      adipisci iste vitae perferendis vel eligendi. Sapiente impedit architecto
-      necessitatibus, repudiandae molestias similique vel tempore dolore
-      quibusdam quis cum ut.
-    </section>
-  </div>
-</mat-drawer-container>

@@ -47,6 +47,7 @@ export function reducer(state = initialState, action: All): State {
       };
     }
     case AuthActionTypes.SIGNUP_FAILURE: {
+      console.log(2323);
       return {
         ...state,
         errorMessage: 'That email is already in use.'

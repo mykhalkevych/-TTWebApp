@@ -1,3 +1,18 @@
-<app-header></app-header>
-<router-outlet></router-outlet>
+<app-header [sidenavRef]="sidenav"> </app-header>
+<mat-sidenav-container class="main" [hasBackdrop]="false">
+  <mat-sidenav #sidenav class="sidenav" opened mode="side">
+    <app-sidebar></app-sidebar>
+  </mat-sidenav>
+
+  <div class="sidenav-content">
+    <router-outlet></router-outlet>
+    <section>
+      Lorem ipsum, dolor sit amet consectetur adipisicing elit. Earum libero
+      adipisci iste vitae perferendis vel eligendi. Sapiente impedit architecto
+      necessitatibus, repudiandae molestias similique vel tempore dolore
+      quibusdam quis cum ut.
+    </section>
+  </div>
+</mat-sidenav-container>
+
 <app-footer></app-footer>

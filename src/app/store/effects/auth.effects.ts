@@ -2,7 +2,7 @@ import { Injectable } from '@angular/core';
 import { Action } from '@ngrx/store';
 import { Router } from '@angular/router';
 import { Actions, Effect, ofType } from '@ngrx/effects';
-import { tap, switchMap } from 'rxjs/operators';
+import { tap, switchMap, catchError, map } from 'rxjs/operators';
 
 import { AuthService } from '../../services/auth/auth.service';
 import {
@@ -51,17 +51,17 @@ export class AuthEffects {
   );
 
   @Effect()
-  SignUp: Observable<any> = this.actions.pipe(
-    ofType(AuthActionTypes.SIGNUP),
-    switchMap((action: SignUp) => {
-      return this.authService.signUp(action.payload)
-        .then(_ => {
-          return new SignUpSuccess({ emial: action.payload.email, password: action.payload.password });
-        })
-        .catch((error) => {
-          return of(new SignUpFailure({ error: error }));
-        });
-    }));
+  SignUp: Observable<any> = this.actions.
+    ofType(AuthActionTypes.SIGNUP)
+    .pipe(map((action: SignUp) => action.payload),
+      switchMap((payload: any) => {
+        return this.authService.signUp(payload)
+          .then(_ => {
+            return new SignUpSuccess({ emial: payload.email, password: payload.password });
+          });
+      }),
+      catchError(err => of(new SignUpFailure({ error: err })))
+    );
 
   @Effect({ dispatch: false })
   SignUpSuccess: Observable<any> = this.actions.pipe(

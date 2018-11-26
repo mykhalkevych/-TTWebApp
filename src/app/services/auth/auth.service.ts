@@ -37,13 +37,11 @@ export class AuthService {
 
   login(authData) {
     const { email, password } = authData;
+    console.log(23);
     return this.afAuth.auth.signInWithEmailAndPassword(email, password);
   }
 
   logout() {
-    this.afAuth.auth.signOut()
-      .then((res) => {
-        // this.router.navigate(['/'])
-      });
+    this.afAuth.auth.signOut();
   }
 }

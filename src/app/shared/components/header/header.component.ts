@@ -1,4 +1,4 @@
-import { Component, OnInit } from '@angular/core';
+import { Component, OnInit, Input } from '@angular/core';
 import { Store } from '@ngrx/store';
 import { AppState, selectAuthState } from 'src/app/store/app.states';
 import { SignUp, LogIn, LogOut } from 'src/app/store/actions/auth.action';
@@ -13,6 +13,7 @@ import * as auth from 'src/app/store/reducers/auth.reducer';
 })
 export class HeaderComponent implements OnInit {
 
+  @Input() sidenavRef;
   isUserLoggedIn = false;
 
   constructor(

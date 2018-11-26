@@ -1,6 +1,14 @@
 import { NgModule } from '@angular/core';
 import { CommonModule } from '@angular/common';
-import { MatButtonModule, MatCheckboxModule, MatMenuModule, MatToolbarModule, MatIconModule, MatSidenavModule } from '@angular/material';
+import {
+  MatButtonModule,
+  MatCheckboxModule,
+  MatMenuModule,
+  MatToolbarModule,
+  MatIconModule,
+  MatSidenavModule,
+  MatListModule
+} from '@angular/material';
 
 const MATERIAL_COMPONENTS = [
   MatButtonModule,
@@ -8,7 +16,8 @@ const MATERIAL_COMPONENTS = [
   MatMenuModule,
   MatToolbarModule,
   MatIconModule,
-  MatSidenavModule
+  MatSidenavModule,
+  MatListModule
 ];
 
 @NgModule({
