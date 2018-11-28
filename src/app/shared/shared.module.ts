@@ -5,6 +5,7 @@ import { FooterComponent } from './components/footer/footer.component';
 import { MaterialModule } from './material.module';
 import { SidebarComponent } from './components/sidebar/sidebar.component';
 import { LoginDialogComponent } from './components/dialog/login-dialog/login-dialog.component';
+import {FormsModule, ReactiveFormsModule} from '@angular/forms';
 
 @NgModule({
   declarations: [
@@ -22,7 +23,9 @@ import { LoginDialogComponent } from './components/dialog/login-dialog/login-dia
   entryComponents: [LoginDialogComponent],
   imports: [
     CommonModule,
-    MaterialModule
+    MaterialModule,
+    FormsModule,
+    ReactiveFormsModule
   ]
 })
 export class SharedModule { }
