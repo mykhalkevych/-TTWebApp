@@ -1,11 +1,11 @@
 import { Component, OnInit, Inject } from '@angular/core';
-import {FormControl, Validators} from '@angular/forms';
-
-
+import {FormControl, Validators, NgForm} from '@angular/forms';
 import { MatDialogRef, MAT_DIALOG_DATA} from '@angular/material';
 
 export interface DialogData {
   name: string;
+  email: string;
+  password: string;
 }
 
 @Component({
@@ -13,6 +13,7 @@ export interface DialogData {
   templateUrl: './login-dialog.component.html',
   styleUrls: ['./login-dialog.component.scss']
 })
+
 export class LoginDialogComponent implements OnInit {
 
   nameFormControl = new FormControl('', [
@@ -34,6 +35,11 @@ export class LoginDialogComponent implements OnInit {
 
   onNoClick(): void {
     this.dialogRef.close();
+  }
+
+  submitForm(form: NgForm) {
+    // tslint:disable-next-line:max-line-length
+    console.log('name: ' + this.nameFormControl.value + '\nemail: ' + this.emailFormControl.value + ';\npassword: ' + this.passwordFormControl.value);
   }
 
   ngOnInit() {

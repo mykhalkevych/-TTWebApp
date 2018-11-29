@@ -1,6 +1,6 @@
 <h2 class="mat-dialog-title">Login</h2>
 
-<form action="" class="popup-form">
+<form class="popup-form" (ngSubmit)="submitForm(loginForm)" #loginForm="ngForm">
 
   <mat-form-field class="full-width">
     <input matInput placeholder="Name" type="name" [formControl]="nameFormControl">

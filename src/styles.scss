@@ -25,4 +25,8 @@ strong, b {
 /*Forms*/
 .popup-form{
   width: 100%;
+  .mat-dialog-actions{
+    justify-content: flex-end;
+    margin-bottom: -12px;
+  }
 }
