@@ -6,14 +6,11 @@ export interface State {
   isAuthenticated: boolean;
   // if authenticated, there should be a user object
   user: User | null;
-  // error message
-  errorMessage: string | null;
 }
 
 export const initialState: State = {
   isAuthenticated: !!localStorage.getItem('token'),
-  user: null,
-  errorMessage: null
+  user: null
 };
 
 export function reducer(state = initialState, action: All): State {
@@ -25,14 +22,7 @@ export function reducer(state = initialState, action: All): State {
         user: {
           token: action.payload.token,
           email: action.payload.email
-        },
-        errorMessage: null
-      };
-    }
-    case AuthActionTypes.LOGIN_FAILURE: {
-      return {
-        ...state,
-        errorMessage: 'Incorrect email and/or password.'
+        }
       };
     }
     case AuthActionTypes.SIGNUP_SUCCESS: {
@@ -42,15 +32,7 @@ export function reducer(state = initialState, action: All): State {
         user: {
           token: action.payload.token,
           email: action.payload.email
-        },
-        errorMessage: null
-      };
-    }
-    case AuthActionTypes.SIGNUP_FAILURE: {
-      console.log(2323);
-      return {
-        ...state,
-        errorMessage: 'That email is already in use.'
+        }
       };
     }
     case AuthActionTypes.LOGOUT: {

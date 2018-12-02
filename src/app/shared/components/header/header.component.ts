@@ -30,7 +30,7 @@ export class HeaderComponent implements OnInit {
 
   singUp() {
     const authUser = {
-      email: 'sdgf@asd.com',
+      email: 'sdgf@assd.com',
       password: '12345678'
     };
     this.store.dispatch(new SignUp(authUser));
