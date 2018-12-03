@@ -17,7 +17,7 @@ import { EffectsModule } from '@ngrx/effects';
 import { AuthEffects } from './store/effects/auth.effects';
 import { RulesComponent } from './pages/rules/rules.component';
 import { StoreDevtoolsModule } from '@ngrx/store-devtools';
-import { appReducer } from './store/reducers/app.reducer';
+
 
 @NgModule({
   declarations: [
@@ -33,12 +33,9 @@ import { appReducer } from './store/reducers/app.reducer';
     MaterialModule,
     SharedModule,
     AppRoutingModule,
-    StoreModule.forRoot({ ui: appReducer }),
+    StoreModule.forRoot(reducers),
     EffectsModule.forRoot([AuthEffects]),
-    StoreDevtoolsModule.instrument({
-      maxAge: 25, // Retains last 25 states
-      logOnly: environment.production, // Restrict extension to log-only mode
-    }),
+    StoreDevtoolsModule.instrument( ),
   ],
   providers: [],
   bootstrap: [AppComponent]
