@@ -55,7 +55,6 @@ export class AuthEffects {
             return new SignUpSuccess({ emial: payload.email, password: payload.password });
           })
           .catch(error => {
-            console.log(error);
             return new HandleError({ error: error });
           });
       }),
@@ -65,6 +64,7 @@ export class AuthEffects {
   SignUpSuccess: Observable<any> = this.actions.pipe(
     ofType(AuthActionTypes.SIGNUP_SUCCESS),
     tap((user) => {
+      console.log(user);
       localStorage.setItem('token', user.payload.token);
       this.router.navigateByUrl('/');
     })

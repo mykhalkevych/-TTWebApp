@@ -17,8 +17,7 @@ export function reducer(state = initialState, action: AllShared): State {
   switch (action.type) {
     case SharedTypes.ERROR: {
       return {
-        ...state,
-        errorMessage: 'That email is already in use.'
+        ...state
       };
     }
     case SharedTypes.START_LOADING: {
@@ -30,7 +29,7 @@ export function reducer(state = initialState, action: AllShared): State {
     case SharedTypes.STOP_LOADING:
       return {
         ...state,
-        isLoading: true
+        isLoading: false
       };
     default: {
       return state;

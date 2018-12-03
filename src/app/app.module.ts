@@ -17,6 +17,7 @@ import { EffectsModule } from '@ngrx/effects';
 import { AuthEffects } from './store/effects/auth.effects';
 import { RulesComponent } from './pages/rules/rules.component';
 import { StoreDevtoolsModule } from '@ngrx/store-devtools';
+import { SharedEffects } from './store/effects/shared.effects';
 
 
 @NgModule({
@@ -34,7 +35,7 @@ import { StoreDevtoolsModule } from '@ngrx/store-devtools';
     SharedModule,
     AppRoutingModule,
     StoreModule.forRoot(reducers),
-    EffectsModule.forRoot([AuthEffects]),
+    EffectsModule.forRoot([AuthEffects, SharedEffects]),
     StoreDevtoolsModule.instrument( ),
   ],
   providers: [],
