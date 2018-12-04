@@ -9,8 +9,37 @@
   <link rel="icon" type="image/x-icon" href="favicon.ico">
   <link href="https://fonts.googleapis.com/css?family=Roboto:400,500" rel="stylesheet">
   <link href="https://fonts.googleapis.com/icon?family=Material+Icons" rel="stylesheet">
+  <style>
+   .page-preloader{
+      position: fixed;
+      top: 0;
+      left: 0;
+      width: 100%;
+      height: 100%;
+      display: flex;
+      justify-content: center;
+      align-items: center;
+      -webkit-transition: all .7s;
+      -moz-transition: all .7s;
+      -ms-transition: all .7s;
+      -o-transition: all .7s;
+      transition: all .7s;
+      transition-delay: .7s;
+      opacity: 0;
+      visibility: hidden;
+      z-index: 1000000;
+      background: #f4f2f4;
+    }
+    .page-preloader.loading {
+      opacity: 1;
+      visibility: visible;
+    }
+  </style>
 </head>
 <body>
+  <div class="page-preloader loading">
+    <img src="assets/giphy.webp" alt="">
+  </div>
   <app-root></app-root>
 </body>
 </html>
