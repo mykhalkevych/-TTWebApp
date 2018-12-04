@@ -1,3 +1,5 @@
+import { StopLoading } from './../actions/shared.action';
+import { AppState } from './../app.states';
 import { Injectable } from '@angular/core';
 import { Router } from '@angular/router';
 import { Actions, Effect, ofType } from '@ngrx/effects';
@@ -11,6 +13,7 @@ import {
 } from '../actions/auth.action';
 import { Observable, of } from 'rxjs';
 import { HandleError } from '../actions/shared.action';
+import { Store } from '@ngrx/store';
 
 
 @Injectable()
@@ -20,6 +23,7 @@ export class AuthEffects {
     private actions: Actions,
     private authService: AuthService,
     private router: Router,
+    private store: Store<AppState>
   ) { }
 
   @Effect()
@@ -65,6 +69,7 @@ export class AuthEffects {
     ofType(AuthActionTypes.SIGNUP_SUCCESS),
     tap((user) => {
       console.log(user);
+      this.store.dispatch(new StopLoading());
       localStorage.setItem('token', user.payload.token);
       this.router.navigateByUrl('/');
     })

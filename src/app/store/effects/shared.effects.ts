@@ -1,3 +1,4 @@
+import { AppState } from './../app.states';
 import { Injectable } from '@angular/core';
 import { Router } from '@angular/router';
 import { Actions, Effect, ofType } from '@ngrx/effects';
@@ -5,8 +6,9 @@ import { switchMap } from 'rxjs/operators';
 
 import { AuthService } from '../../services/auth/auth.service';
 import { of } from 'rxjs';
-import { SharedTypes, HandleError } from '../actions/shared.action';
+import { SharedTypes, HandleError, StopLoading } from '../actions/shared.action';
 import { MatSnackBar } from '@angular/material';
+import { Store } from '@ngrx/store';
 
 
 @Injectable()
@@ -16,7 +18,8 @@ export class SharedEffects {
     private actions: Actions,
     private authService: AuthService,
     private router: Router,
-    private snackBar: MatSnackBar
+    private snackBar: MatSnackBar,
+    private store: Store<AppState>
   ) { }
 
   // The Error handler
@@ -28,6 +31,8 @@ export class SharedEffects {
         console.log(error);
         // ... you can check the payload here to show different messages
         // like if error.statusCode === 501 etc.
+      this.store.dispatch(new StopLoading());
+
         const errMsg = error.payload.error.message;
         this.snackBar.open(errMsg, 'Ok', {
           duration: 2500

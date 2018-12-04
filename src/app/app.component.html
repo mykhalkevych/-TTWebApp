@@ -1,4 +1,7 @@
 <app-header [sidenavRef]="sidenav"> </app-header>
+<div class="spinner" *ngIf="isLoading | async">
+  <mat-spinner></mat-spinner>
+</div>
 <mat-sidenav-container class="main" [hasBackdrop]="false">
   <mat-sidenav #sidenav class="sidenav" opened mode="side">
     <app-sidebar></app-sidebar>
@@ -9,4 +12,4 @@
   </div>
 </mat-sidenav-container>
 
-<app-footer></app-footer>
+<!-- <app-footer></app-footer> -->

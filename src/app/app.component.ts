@@ -1,3 +1,6 @@
+import { Observable } from 'rxjs';
+import { AppState, getIsLoading } from 'src/app/store/app.states';
+import { Store } from '@ngrx/store';
 import { Component, OnInit } from '@angular/core';
 
 @Component({
@@ -7,11 +10,17 @@ import { Component, OnInit } from '@angular/core';
 })
 export class AppComponent implements OnInit {
   title = 'ttwebapp';
+  isLoading: Observable<boolean>;
+  constructor(
+    private store: Store<AppState>
+  ) {
 
+  }
   ngOnInit() {
     const pagePreloader = document.querySelector('.page-preloader');
     setTimeout(() => {
       pagePreloader.classList.remove('loading');
     }, 300);
+    this.isLoading = this.store.select(getIsLoading);
   }
 }

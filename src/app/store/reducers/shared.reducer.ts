@@ -36,3 +36,5 @@ export function reducer(state = initialState, action: AllShared): State {
     }
   }
 }
+
+export const getIsloading = (state: State) => state.isLoading;
