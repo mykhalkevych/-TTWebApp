@@ -1,12 +1,7 @@
-import { Component, OnInit, Inject } from '@angular/core';
-import {FormControl, Validators, NgForm} from '@angular/forms';
-import { MatDialogRef, MAT_DIALOG_DATA} from '@angular/material';
+import { Component, OnInit } from '@angular/core';
+import { FormControl, Validators, FormGroup, FormBuilder } from '@angular/forms';
+import { MatDialogRef } from '@angular/material';
 
-export interface DialogData {
-  name: string;
-  email: string;
-  password: string;
-}
 
 @Component({
   selector: 'app-login-dialog',
@@ -16,33 +11,30 @@ export interface DialogData {
 
 export class LoginDialogComponent implements OnInit {
 
-  nameFormControl = new FormControl('', [
-    Validators.required,
-  ]);
-
-  emailFormControl = new FormControl('', [
-    Validators.required,
-    Validators.email,
-  ]);
-
-  passwordFormControl = new FormControl('', [
-    Validators.required,
-  ]);
+  loginForm: FormGroup;
 
   constructor(
     public dialogRef: MatDialogRef<LoginDialogComponent>,
-    @Inject(MAT_DIALOG_DATA) public data: DialogData) {}
+    private formBuilder: FormBuilder
+  ) { }
 
-  onNoClick(): void {
+  closeDialog(): void {
     this.dialogRef.close();
   }
 
-  submitForm(form: NgForm) {
-    // tslint:disable-next-line:max-line-length
-    console.log('name: ' + this.nameFormControl.value + '\nemail: ' + this.emailFormControl.value + ';\npassword: ' + this.passwordFormControl.value);
+  login() {
+    console.log(this.loginForm);
+    if (this.loginForm.valid) {
+
+      this.dialogRef.close();
+    }
   }
 
   ngOnInit() {
+    this.loginForm = this.formBuilder.group({
+      email: ['', [Validators.required, Validators.pattern(/\S+@\S+\.\S+/)]],
+      password: ['', [Validators.required, Validators.minLength(4)]]
+    });
   }
 
 }
