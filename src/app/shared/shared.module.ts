@@ -23,7 +23,7 @@ import { RegistrationDialogComponent } from './components/dialog/registration-di
     SidebarComponent,
     LoginDialogComponent
   ],
-  entryComponents: [LoginDialogComponent],
+  entryComponents: [LoginDialogComponent, RegistrationDialogComponent],
   imports: [
     CommonModule,
     RouterModule,

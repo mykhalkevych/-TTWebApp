@@ -1,4 +1,9 @@
 import { Component, OnInit } from '@angular/core';
+import { FormGroup, FormBuilder, Validators } from '@angular/forms';
+import { Store } from '@ngrx/store';
+import { AppState } from 'src/app/store/app.states';
+import { MatDialogRef } from '@angular/material';
+import { SignUp } from 'src/app/store/actions/auth.action';
 
 @Component({
   selector: 'app-registration-dialog',
@@ -7,9 +12,30 @@ import { Component, OnInit } from '@angular/core';
 })
 export class RegistrationDialogComponent implements OnInit {
 
-  constructor() { }
+  registrationForm: FormGroup;
+
+  constructor(
+    public dialogRef: MatDialogRef<RegistrationDialogComponent>,
+    private formBuilder: FormBuilder,
+    private store: Store<AppState>
+  ) { }
+
+  closeDialog(): void {
+    this.dialogRef.close();
+  }
+
+  registration() {
+    if (this.registrationForm.valid) {
+      this.store.dispatch(new SignUp(this.registrationForm.value));
+    }
+  }
 
   ngOnInit() {
+    this.registrationForm = this.formBuilder.group({
+      name: ['', [Validators.required, Validators.minLength(2)]],
+      email: ['', [Validators.required, Validators.pattern(/\S+@\S+\.\S+/)]],
+      password: ['', [Validators.required, Validators.minLength(4)]]
+    });
   }
 
 }

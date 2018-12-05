@@ -18,6 +18,7 @@ import { AuthEffects } from './store/effects/auth.effects';
 import { RulesComponent } from './pages/rules/rules.component';
 import { StoreDevtoolsModule } from '@ngrx/store-devtools';
 import { SharedEffects } from './store/effects/shared.effects';
+import { MatDialogRef } from '@angular/material/dialog';
 
 
 @NgModule({
@@ -36,9 +37,8 @@ import { SharedEffects } from './store/effects/shared.effects';
     AppRoutingModule,
     StoreModule.forRoot(reducers),
     EffectsModule.forRoot([AuthEffects, SharedEffects]),
-    StoreDevtoolsModule.instrument( ),
+    StoreDevtoolsModule.instrument(),
   ],
-  providers: [],
   bootstrap: [AppComponent]
 })
 export class AppModule { }

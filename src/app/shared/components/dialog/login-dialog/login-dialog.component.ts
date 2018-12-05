@@ -1,6 +1,9 @@
 import { Component, OnInit } from '@angular/core';
-import { FormControl, Validators, FormGroup, FormBuilder } from '@angular/forms';
+import { Validators, FormGroup, FormBuilder } from '@angular/forms';
 import { MatDialogRef } from '@angular/material';
+import { Store } from '@ngrx/store';
+import { AppState } from 'src/app/store/app.states';
+import { LogIn } from 'src/app/store/actions/auth.action';
 
 
 @Component({
@@ -15,7 +18,8 @@ export class LoginDialogComponent implements OnInit {
 
   constructor(
     public dialogRef: MatDialogRef<LoginDialogComponent>,
-    private formBuilder: FormBuilder
+    private formBuilder: FormBuilder,
+    private store: Store<AppState>
   ) { }
 
   closeDialog(): void {
@@ -23,10 +27,8 @@ export class LoginDialogComponent implements OnInit {
   }
 
   login() {
-    console.log(this.loginForm);
     if (this.loginForm.valid) {
-
-      this.dialogRef.close();
+      this.store.dispatch(new LogIn(this.loginForm.value));
     }
   }
 

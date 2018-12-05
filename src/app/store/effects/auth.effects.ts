@@ -14,16 +14,17 @@ import {
 import { Observable, of } from 'rxjs';
 import { HandleError } from '../actions/shared.action';
 import { Store } from '@ngrx/store';
+import { MatDialog } from '@angular/material';
 
 
 @Injectable()
 export class AuthEffects {
-
   constructor(
     private actions: Actions,
     private authService: AuthService,
     private router: Router,
-    private store: Store<AppState>
+    private store: Store<AppState>,
+    private dialog: MatDialog
   ) { }
 
   @Effect()
@@ -44,6 +45,7 @@ export class AuthEffects {
     ofType(AuthActionTypes.LOGIN_SUCCESS),
     tap((user) => {
       localStorage.setItem('token', user.payload.token);
+      this.dialog.closeAll();
       this.router.navigateByUrl('/');
     })
   );
@@ -68,7 +70,7 @@ export class AuthEffects {
   SignUpSuccess: Observable<any> = this.actions.pipe(
     ofType(AuthActionTypes.SIGNUP_SUCCESS),
     tap((user) => {
-      console.log(user);
+      this.dialog.closeAll();
       this.store.dispatch(new StopLoading());
       localStorage.setItem('token', user.payload.token);
       this.router.navigateByUrl('/');

@@ -11,7 +11,8 @@ import {
   MatSnackBarModule,
   MatProgressSpinnerModule,
   MatDialogModule,
-  MatInputModule
+  MatInputModule,
+  MatDialogRef
 } from '@angular/material';
 
 const MATERIAL_COMPONENTS = [
@@ -36,6 +37,7 @@ const MATERIAL_COMPONENTS = [
   ],
   exports: [
     ...MATERIAL_COMPONENTS
-  ]
+  ],
+  providers: [{ provide: MatDialogRef, useValue: {} }]
 })
 export class MaterialModule { }
