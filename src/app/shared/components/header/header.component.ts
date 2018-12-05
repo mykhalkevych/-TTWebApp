@@ -3,7 +3,8 @@ import { Store } from '@ngrx/store';
 import { AppState, selectAuthState } from 'src/app/store/app.states';
 import { SignUp, LogIn, LogOut } from 'src/app/store/actions/auth.action';
 import * as auth from 'src/app/store/reducers/auth.reducer';
-
+import { MatDialog } from '@angular/material';
+import { LoginDialogComponent } from 'src/app/shared/components/dialog/login-dialog/login-dialog.component';
 
 
 @Component({
@@ -17,7 +18,8 @@ export class HeaderComponent implements OnInit {
   isUserLoggedIn = false;
 
   constructor(
-    private store: Store<AppState>
+    private store: Store<AppState>,
+    public dialog: MatDialog
   ) { }
 
   ngOnInit() {
@@ -37,6 +39,14 @@ export class HeaderComponent implements OnInit {
   }
 
   login() {
+    const dialogRef = this.dialog.open(LoginDialogComponent, {
+      width: '400px'
+    });
+
+    dialogRef.afterClosed().subscribe(result => {
+      console.log('The dialog was closed');
+    });
+
     const authUser = {
       email: '32ds453@asd.com',
       password: '12345678'
