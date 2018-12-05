@@ -15,6 +15,7 @@ import { Observable, of } from 'rxjs';
 import { HandleError } from '../actions/shared.action';
 import { Store } from '@ngrx/store';
 import { MatDialog } from '@angular/material';
+import { LoginDialogComponent } from 'src/app/shared/components/dialog/login-dialog/login-dialog.component';
 
 
 @Injectable()
@@ -55,10 +56,9 @@ export class AuthEffects {
     ofType(AuthActionTypes.SIGNUP)
     .pipe(map((action: SignUp) => action.payload),
       switchMap((payload: any) => {
-        console.log(payload);
         return this.authService.signUp(payload)
           .then(_ => {
-            return new SignUpSuccess({ emial: payload.email, password: payload.password });
+            return new SignUpSuccess({ email: payload.email, password: payload.password });
           })
           .catch(error => {
             return new HandleError({ error: error });
@@ -70,8 +70,12 @@ export class AuthEffects {
   SignUpSuccess: Observable<any> = this.actions.pipe(
     ofType(AuthActionTypes.SIGNUP_SUCCESS),
     tap((user) => {
+      console.log(user);
       this.dialog.closeAll();
-      this.store.dispatch(new StopLoading());
+      this.dialog.open(LoginDialogComponent, {
+        data: user.payload,
+        width: '400px'
+      });
       localStorage.setItem('token', user.payload.token);
       this.router.navigateByUrl('/');
     })

@@ -1,10 +1,10 @@
-import { Component, OnInit } from '@angular/core';
+import { Component, OnInit, Inject } from '@angular/core';
 import { Validators, FormGroup, FormBuilder } from '@angular/forms';
 import { MatDialogRef } from '@angular/material';
 import { Store } from '@ngrx/store';
 import { AppState } from 'src/app/store/app.states';
 import { LogIn } from 'src/app/store/actions/auth.action';
-
+import { MAT_DIALOG_DATA } from '@angular/material';
 
 @Component({
   selector: 'app-login-dialog',
@@ -19,7 +19,8 @@ export class LoginDialogComponent implements OnInit {
   constructor(
     public dialogRef: MatDialogRef<LoginDialogComponent>,
     private formBuilder: FormBuilder,
-    private store: Store<AppState>
+    private store: Store<AppState>,
+    @Inject(MAT_DIALOG_DATA) public data: any
   ) { }
 
   closeDialog(): void {
@@ -33,10 +34,15 @@ export class LoginDialogComponent implements OnInit {
   }
 
   ngOnInit() {
+    console.log(this.data);
     this.loginForm = this.formBuilder.group({
       email: ['', [Validators.required, Validators.pattern(/\S+@\S+\.\S+/)]],
       password: ['', [Validators.required, Validators.minLength(6)]]
     });
+    if (this.data) {
+      this.loginForm.controls['email'].setValue(this.data.email);
+      this.loginForm.controls['password'].setValue(this.data.password);
+    }
   }
 
 }
