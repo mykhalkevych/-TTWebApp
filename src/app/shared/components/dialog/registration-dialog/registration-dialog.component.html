@@ -3,7 +3,7 @@
 <form class="popup-form" [formGroup]="registrationForm" novalidate (ngSubmit)="registration()">
 
   <mat-form-field class="full-width">
-    <input matInput placeholder="Name" type="password" formControlName="name">
+    <input matInput placeholder="Name" type="text" formControlName="name">
     <mat-error *ngIf="registrationForm.controls['name'].hasError('required')">
       Name is <strong>required</strong>
     </mat-error>
@@ -26,7 +26,7 @@
       Password is <strong>required</strong>
     </mat-error>
     <mat-error *ngIf="registrationForm.controls['password'].hasError('minlength')">
-      Minimum 4 characters
+      Minimum 6 characters
     </mat-error>
   </mat-form-field>
 

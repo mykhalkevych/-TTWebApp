@@ -34,7 +34,7 @@ export class RegistrationDialogComponent implements OnInit {
     this.registrationForm = this.formBuilder.group({
       name: ['', [Validators.required, Validators.minLength(2)]],
       email: ['', [Validators.required, Validators.pattern(/\S+@\S+\.\S+/)]],
-      password: ['', [Validators.required, Validators.minLength(4)]]
+      password: ['', [Validators.required, Validators.minLength(6)]]
     });
   }
 
