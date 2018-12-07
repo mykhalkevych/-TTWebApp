@@ -1,4 +1,3 @@
-import { User } from 'src/app/models/user.model';
 import { SharedTypes, AllShared } from '../actions/shared.action';
 
 export interface State {
