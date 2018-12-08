@@ -15,6 +15,7 @@ export function reducer(state = initialState, action: PlayerActions): State {
     case PlayerActionTypes.LOAD_PLAYERS_SUCCESS: {
       return {
         ...state,
+        players: action.payload
       };
     }
     case PlayerActionTypes.ADD_PLAYER_SUCCESS: {
@@ -28,4 +29,7 @@ export function reducer(state = initialState, action: PlayerActions): State {
     }
   }
 }
+
+export const getPlayers = (state: State) => state.players;
+
 

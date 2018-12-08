@@ -1,7 +1,9 @@
+import { Player } from './../../models/player.model';
+import { LoadPlayers } from 'src/app/store/actions/player.actions';
 import { Injectable } from '@angular/core';
 import { Actions, Effect, ofType } from '@ngrx/effects';
-import { switchMap } from 'rxjs/operators';
-import { Observable } from 'rxjs';
+import { switchMap, map, catchError } from 'rxjs/operators';
+import { Observable, of } from 'rxjs';
 
 import { PlayerService } from './../../services/player/player.service';
 import { AddPlayer, PlayerActionTypes, AddPlayerSuccess, LoadPlayersSuccess } from '../actions/player.actions';
@@ -21,19 +23,15 @@ export class PlayerEffects {
   LoadPlayers: Observable<any> = this.actions
     .pipe(
       ofType(PlayerActionTypes.LOAD_PLAYERS),
-      switchMap((_) => {
+      switchMap((action: LoadPlayers) => {
         return this.playerService.loadPlayers()
-          .valueChanges()
-          .toPromise()
-          .then((players: any) => {
-            return new LoadPlayersSuccess(players);
-          })
-          .catch(error => {
-            return new HandleError({ error: error });
-          });
+          .pipe(
+            map((players: Array<Player>) => new LoadPlayersSuccess(players)),
+            catchError(error => of(new HandleError({ error: error })))
+          );
       }));
 
-  @Effect()
+  @Effect({ dispatch: false })
   AddPlayer: Observable<any> = this.actions
     .pipe(
       ofType(PlayerActionTypes.ADD_PLAYER),

@@ -42,3 +42,5 @@ export function reducer(state = initialState, action: All): State {
     }
   }
 }
+
+export const getIsAuthenticated = (state: State) => state.isAuthenticated;

@@ -1,6 +1,6 @@
 import { Component, OnInit, Input } from '@angular/core';
 import { Store } from '@ngrx/store';
-import { AppState, selectAuthState } from 'src/app/store/app.states';
+import { AppState, getIsAuthenticated } from 'src/app/store/app.states';
 import { LogOut } from 'src/app/store/actions/auth.action';
 import * as auth from 'src/app/store/reducers/auth.reducer';
 import { MatDialog } from '@angular/material';
@@ -24,10 +24,10 @@ export class HeaderComponent implements OnInit {
   ) { }
 
   ngOnInit() {
-    this.store.select(selectAuthState)
-      .subscribe((res: auth.State) => {
+    this.store.select(getIsAuthenticated)
+      .subscribe(res => {
         console.log(res);
-        this.isUserLoggedIn = res.isAuthenticated;
+        this.isUserLoggedIn = res;
       });
   }
 

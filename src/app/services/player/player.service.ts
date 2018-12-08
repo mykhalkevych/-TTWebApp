@@ -11,7 +11,7 @@ export class PlayerService {
   ) { }
 
   loadPlayers() {
-    return this.afs.collection('players');
+    return this.afs.collection('players').valueChanges();
   }
 
   addPlayer(player: Player) {
