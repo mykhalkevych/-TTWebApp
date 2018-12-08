@@ -41,7 +41,6 @@ export class LoginDialogComponent implements OnInit {
     });
     if (this.data) {
       this.loginForm.controls['email'].setValue(this.data.email);
-      this.loginForm.controls['password'].setValue(this.data.password);
     }
   }
 

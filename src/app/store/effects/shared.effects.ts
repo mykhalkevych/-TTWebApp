@@ -31,7 +31,7 @@ export class SharedEffects {
         console.log(error);
         // ... you can check the payload here to show different messages
         // like if error.statusCode === 501 etc.
-      this.store.dispatch(new StopLoading());
+        this.store.dispatch(new StopLoading());
 
         const errMsg = error.payload.error.message;
         this.snackBar.open(errMsg, 'Ok', {

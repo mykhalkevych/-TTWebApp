@@ -10,14 +10,11 @@ export class PlayerService {
     private afs: AngularFirestore
   ) { }
 
-  getAllPlayers() {
+  loadPlayers() {
     return this.afs.collection('players');
   }
 
-  addNewPlayer(player: Player) {
-    this.afs.collection('players').add(player)
-      .then(res => {
-        console.log(res);
-      });
+  addPlayer(player: Player) {
+    return this.afs.collection('players').add(player);
   }
 }

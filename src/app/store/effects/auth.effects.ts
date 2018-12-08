@@ -1,20 +1,22 @@
-import { StopLoading } from './../actions/shared.action';
-import { AppState } from './../app.states';
+import { Player } from './../../models/player.model';
 import { Injectable } from '@angular/core';
 import { Router } from '@angular/router';
 import { Actions, Effect, ofType } from '@ngrx/effects';
 import { tap, switchMap, map } from 'rxjs/operators';
+import { Observable } from 'rxjs';
+import { Store } from '@ngrx/store';
+import { MatDialog } from '@angular/material';
 
+
+import { AddPlayer } from '../actions/player.actions';
+import { AppState } from './../app.states';
 import { AuthService } from '../../services/auth/auth.service';
 import {
   AuthActionTypes,
   LogIn, LogInSuccess,
   SignUp, SignUpSuccess,
 } from '../actions/auth.action';
-import { Observable, of } from 'rxjs';
 import { HandleError } from '../actions/shared.action';
-import { Store } from '@ngrx/store';
-import { MatDialog } from '@angular/material';
 import { LoginDialogComponent } from 'src/app/shared/components/dialog/login-dialog/login-dialog.component';
 
 
@@ -29,36 +31,39 @@ export class AuthEffects {
   ) { }
 
   @Effect()
-  LogIn: Observable<any> = this.actions.pipe(
-    ofType(AuthActionTypes.LOGIN),
-    switchMap((action: LogIn) => {
-      return this.authService.login(action.payload)
-        .then((user: any) => {
-          return new LogInSuccess(user);
-        })
-        .catch(error => {
-          return new HandleError({ error: error });
-        });
-    }));
+  LogIn: Observable<any> = this.actions
+    .pipe(
+      ofType(AuthActionTypes.LOGIN),
+      switchMap((action: LogIn) => {
+        return this.authService.login(action.payload)
+          .then((user: any) => {
+            return new LogInSuccess(user);
+          })
+          .catch(error => {
+            return new HandleError({ error: error });
+          });
+      }));
 
   @Effect({ dispatch: false })
-  LogInSuccess: Observable<any> = this.actions.pipe(
-    ofType(AuthActionTypes.LOGIN_SUCCESS),
-    tap((user) => {
-      localStorage.setItem('token', user.payload.token);
-      this.dialog.closeAll();
-      this.router.navigateByUrl('/');
-    })
-  );
+  LogInSuccess: Observable<any> = this.actions
+    .pipe(
+      ofType(AuthActionTypes.LOGIN_SUCCESS),
+      tap((user) => {
+        localStorage.setItem('token', user.payload.token);
+        this.dialog.closeAll();
+        this.router.navigateByUrl('/');
+      })
+    );
 
   @Effect()
-  SignUp: Observable<any> = this.actions.
-    ofType(AuthActionTypes.SIGNUP)
-    .pipe(map((action: SignUp) => action.payload),
+  SignUp: Observable<any> = this.actions
+    .pipe(
+      ofType(AuthActionTypes.SIGNUP),
+      map((action: SignUp) => action.payload),
       switchMap((payload: any) => {
         return this.authService.signUp(payload)
-          .then(_ => {
-            return new SignUpSuccess({ email: payload.email, password: payload.password });
+          .then(res => {
+            return new SignUpSuccess(res);
           })
           .catch(error => {
             return new HandleError({ error: error });
@@ -67,25 +72,32 @@ export class AuthEffects {
     );
 
   @Effect({ dispatch: false })
-  SignUpSuccess: Observable<any> = this.actions.pipe(
-    ofType(AuthActionTypes.SIGNUP_SUCCESS),
-    tap((user) => {
-      console.log(user);
-      this.dialog.closeAll();
-      this.dialog.open(LoginDialogComponent, {
-        data: user.payload,
-        width: '400px'
-      });
-      localStorage.setItem('token', user.payload.token);
-      this.router.navigateByUrl('/');
-    })
-  );
+  SignUpSuccess: Observable<any> = this.actions
+    .pipe(
+      ofType(AuthActionTypes.SIGNUP_SUCCESS),
+      tap((data) => {
+        console.log(data);
+        const user = data.payload.user;
+        const player: Player = {
+          id: user.uid,
+          name: user.displayName,
+          email: user.email
+        };
+        this.store.dispatch(new AddPlayer(player));
+        this.dialog.closeAll();
+        this.dialog.open(LoginDialogComponent, {
+          data: { email: user.email },
+          width: '400px'
+        });
+      })
+    );
 
   @Effect({ dispatch: false })
-  public LogOut: Observable<any> = this.actions.pipe(
-    ofType(AuthActionTypes.LOGOUT),
-    tap((user) => {
-      localStorage.removeItem('token');
-    })
-  );
+  public LogOut: Observable<any> = this.actions
+    .pipe(
+      ofType(AuthActionTypes.LOGOUT),
+      tap((user) => {
+        localStorage.removeItem('token');
+      })
+    );
 }
