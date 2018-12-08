@@ -30,13 +30,13 @@ export class AuthService {
     return !!localStorage.getItem('token');
   }
 
-  signUp(authData) {
-    const { email, password } = authData;
+  signUp(user) {
+    const { email, password } = user;
     return this.afAuth.auth.createUserWithEmailAndPassword(email, password);
   }
 
-  login(authData) {
-    const { email, password } = authData;
+  login(user) {
+    const { email, password } = user;
     return this.afAuth.auth.signInWithEmailAndPassword(email, password);
   }
 

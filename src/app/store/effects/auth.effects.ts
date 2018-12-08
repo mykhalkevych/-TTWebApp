@@ -1,3 +1,4 @@
+import { StopLoading } from './../actions/shared.action';
 import { Player } from './../../models/player.model';
 import { Injectable } from '@angular/core';
 import { Router } from '@angular/router';
@@ -16,7 +17,7 @@ import {
   LogIn, LogInSuccess,
   SignUp, SignUpSuccess,
 } from '../actions/auth.action';
-import { HandleError } from '../actions/shared.action';
+import { HandleError, StartLoading } from '../actions/shared.action';
 import { LoginDialogComponent } from 'src/app/shared/components/dialog/login-dialog/login-dialog.component';
 
 
@@ -35,6 +36,7 @@ export class AuthEffects {
     .pipe(
       ofType(AuthActionTypes.LOGIN),
       switchMap((action: LogIn) => {
+        this.store.dispatch(new StartLoading());
         return this.authService.login(action.payload)
           .then((user: any) => {
             return new LogInSuccess(user);
@@ -49,6 +51,7 @@ export class AuthEffects {
     .pipe(
       ofType(AuthActionTypes.LOGIN_SUCCESS),
       tap((user) => {
+        this.store.dispatch(new StopLoading());
         localStorage.setItem('token', user.payload.token);
         this.dialog.closeAll();
         this.router.navigateByUrl('/');
@@ -63,6 +66,7 @@ export class AuthEffects {
       switchMap((payload: any) => {
         return this.authService.signUp(payload)
           .then(res => {
+            res.user['userName'] = payload.name;
             return new SignUpSuccess(res);
           })
           .catch(error => {
@@ -80,7 +84,7 @@ export class AuthEffects {
         const user = data.payload.user;
         const player: Player = {
           id: user.uid,
-          name: user.displayName,
+          name: user.userName,
           email: user.email
         };
         this.store.dispatch(new AddPlayer(player));
