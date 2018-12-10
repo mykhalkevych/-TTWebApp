@@ -1,3 +1,55 @@
-<p>
-  home works!
-</p>
+<div class="container">
+  <div class="row">
+    <div class="col-9">
+      <div class="news">
+        <h2>News</h2>
+        <mat-card class="example-card">
+          <mat-card-title>Shiba Inu</mat-card-title>
+          <mat-card-content>
+            <p>
+              The Shiba Inu is the smallest of the six original and distinct spitz breeds of dog from Japan.
+              A small, agile dog that copes very well with mountainous terrain, the Shiba Inu was originally
+              bred for hunting.
+            </p>
+          </mat-card-content>
+          <mat-card-actions>
+            <button mat-button>LIKE</button>
+            <button mat-button>SHARE</button>
+          </mat-card-actions>
+        </mat-card>
+        <mat-card class="example-card">
+            <mat-card-title>Shiba Inu</mat-card-title>
+            <mat-card-content>
+              <p>
+                The Shiba Inu is the smallest of the six original and distinct spitz breeds of dog from Japan.
+                A small, agile dog that copes very well with mountainous terrain, the Shiba Inu was originally
+                bred for hunting.
+              </p>
+            </mat-card-content>
+            <mat-card-actions>
+              <button mat-button>LIKE</button>
+              <button mat-button>SHARE</button>
+            </mat-card-actions>
+          </mat-card>
+        <mat-card>Simple card</mat-card>
+        <mat-card>Simple card</mat-card>
+        <mat-card>Simple card</mat-card>
+        <mat-card>Simple card</mat-card>
+        <mat-card>Simple card</mat-card>
+      </div>
+    </div>
+    <div class="col-3">
+      <mat-card>
+        <h3>Players</h3>
+        <mat-list>
+          <mat-list-item *ngFor="let player of players; let i = index" [routerLink]="['player', player.id]">
+            <span class="number">{{i+1+'. '}}</span>
+            <img matListAvatar src="{{player.avatar || './assets/images/avatar.jpg'}}" alt="{{player.name}}">
+            <h3 matLine> {{player.name}} </h3>
+            <span class="level">{{player.level}}</span>
+          </mat-list-item>
+        </mat-list>
+      </mat-card>
+    </div>
+  </div>
+</div>

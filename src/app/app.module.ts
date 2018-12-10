@@ -20,13 +20,15 @@ import { AuthEffects } from './store/effects/auth.effects';
 import { RulesComponent } from './pages/rules/rules.component';
 import { StoreDevtoolsModule } from '@ngrx/store-devtools';
 import { SharedEffects } from './store/effects/shared.effects';
+import { PlayerDetailComponent } from './pages/player-detail/player-detail.component';
 
 
 @NgModule({
   declarations: [
     AppComponent,
     HomeComponent,
-    RulesComponent
+    RulesComponent,
+    PlayerDetailComponent
   ],
   imports: [
     BrowserModule,

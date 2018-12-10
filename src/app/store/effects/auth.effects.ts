@@ -85,7 +85,8 @@ export class AuthEffects {
         const player: Player = {
           id: user.uid,
           name: user.userName,
-          email: user.email
+          email: user.email,
+          level: 1
         };
         this.store.dispatch(new AddPlayer(player));
         this.dialog.closeAll();
