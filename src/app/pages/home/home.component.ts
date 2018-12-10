@@ -1,27 +1,32 @@
 import { Player } from './../../models/player.model';
 import { AppState, selectPlayers } from 'src/app/store/app.states';
 import { Store } from '@ngrx/store';
-import { Component, OnInit } from '@angular/core';
+import { Component, OnInit, OnDestroy } from '@angular/core';
 import { LoadPlayers } from 'src/app/store/actions/player.actions';
+import { Subscription } from 'rxjs';
 
 @Component({
   selector: 'app-home',
   templateUrl: './home.component.html',
   styleUrls: ['./home.component.scss']
 })
-export class HomeComponent implements OnInit {
+export class HomeComponent implements OnInit, OnDestroy {
 
   players: Array<Player> = [];
+  playersSubscription: Subscription;
 
   constructor(private store: Store<AppState>) { }
 
   ngOnInit() {
     this.store.dispatch(new LoadPlayers());
-    this.store.select(selectPlayers)
+    this.playersSubscription = this.store.select(selectPlayers)
       .subscribe(res => {
         console.log(res);
         this.players = res;
       });
+  }
+  ngOnDestroy() {
+    this.playersSubscription.unsubscribe();
   }
 
 }

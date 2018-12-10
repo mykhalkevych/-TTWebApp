@@ -1,5 +1,5 @@
 import { Player } from './../../models/player.model';
-import { LoadPlayers } from 'src/app/store/actions/player.actions';
+import { LoadPlayers, LoadPlayer, LoadPlayerSuccess } from 'src/app/store/actions/player.actions';
 import { Injectable } from '@angular/core';
 import { Actions, Effect, ofType } from '@ngrx/effects';
 import { switchMap, map, catchError } from 'rxjs/operators';
@@ -27,6 +27,21 @@ export class PlayerEffects {
         return this.playerService.loadPlayers()
           .pipe(
             map((players: Array<Player>) => new LoadPlayersSuccess(players)),
+            catchError(error => of(new HandleError({ error: error })))
+          );
+      }));
+  @Effect()
+  LoadPlayer: Observable<any> = this.actions
+    .pipe(
+      ofType(PlayerActionTypes.LOAD_PLAYER),
+      switchMap((action: LoadPlayer) => {
+        console.log(action);
+        return this.playerService.loadPlayer(action.payload)
+          .pipe(
+            map((player: Player) => {
+              console.log(player);
+              return new LoadPlayerSuccess(player);
+            }),
             catchError(error => of(new HandleError({ error: error })))
           );
       }));
