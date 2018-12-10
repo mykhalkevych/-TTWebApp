@@ -1,4 +1,6 @@
-import { Component, OnInit } from '@angular/core';
+import { Subscription } from 'rxjs';
+import { selectCurrentPlayer } from './../../store/app.states';
+import { Component, OnInit, OnDestroy } from '@angular/core';
 import { ActivatedRoute } from '@angular/router';
 import { Store } from '@ngrx/store';
 
@@ -12,11 +14,11 @@ import { AngularFirestore } from '@angular/fire/firestore';
   templateUrl: './player-detail.component.html',
   styleUrls: ['./player-detail.component.scss']
 })
-export class PlayerDetailComponent implements OnInit {
+export class PlayerDetailComponent implements OnInit, OnDestroy {
 
   playerId: string;
   player: any;
-
+  playerSubscription: Subscription;
   constructor(
     private route: ActivatedRoute,
     private store: Store<AppState>,
@@ -26,11 +28,18 @@ export class PlayerDetailComponent implements OnInit {
 
   ngOnInit() {
     this.playerId = this.route.snapshot.params['id'];
-    this.player = this.afs.doc(`players/${this.playerId}`).valueChanges();
-    console.log(this.playerId);
     if (this.playerId) {
       this.store.dispatch(new LoadPlayer(this.playerId));
     }
+    this.playerSubscription = this.store.select(selectCurrentPlayer)
+      .subscribe(res => {
+        console.log(res);
+        this.player = res;
+      });
+  }
+
+  ngOnDestroy() {
+    this.playerSubscription.unsubscribe();
   }
 
 }

@@ -23,5 +23,6 @@ export const getIsLoading = createSelector(selectSharedState, fromShared.getIslo
 
 export const selectPlayersState = createFeatureSelector<fromPlayer.State>('playerState');
 export const selectPlayers = createSelector(selectPlayersState, fromPlayer.getPlayers);
+export const selectCurrentPlayer = createSelector(selectPlayersState, fromPlayer.getCurrentPlayer);
 
 

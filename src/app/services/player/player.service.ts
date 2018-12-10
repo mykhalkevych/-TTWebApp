@@ -11,12 +11,9 @@ export class PlayerService {
   ) { }
 
   loadPlayers() {
-    return this.afs.collection('players').valueChanges();
+    return this.afs.collection('players').snapshotChanges();
   }
   loadPlayer(id) {
-    this.afs.doc<Player>(`players/${id}`).valueChanges().subscribe(res => {
-      console.log(res);
-    });
     return this.afs.doc<Player>(`players/${id}`).valueChanges();
   }
 

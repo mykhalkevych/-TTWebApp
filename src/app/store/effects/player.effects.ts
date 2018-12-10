@@ -2,7 +2,7 @@ import { Player } from './../../models/player.model';
 import { LoadPlayers, LoadPlayer, LoadPlayerSuccess } from 'src/app/store/actions/player.actions';
 import { Injectable } from '@angular/core';
 import { Actions, Effect, ofType } from '@ngrx/effects';
-import { switchMap, map, catchError } from 'rxjs/operators';
+import { switchMap, map, catchError, mergeMap } from 'rxjs/operators';
 import { Observable, of } from 'rxjs';
 
 import { PlayerService } from './../../services/player/player.service';
@@ -23,10 +23,17 @@ export class PlayerEffects {
   LoadPlayers: Observable<any> = this.actions
     .pipe(
       ofType(PlayerActionTypes.LOAD_PLAYERS),
-      switchMap((action: LoadPlayers) => {
+      mergeMap((action: LoadPlayers) => {
         return this.playerService.loadPlayers()
           .pipe(
-            map((players: Array<Player>) => new LoadPlayersSuccess(players)),
+            map(data => {
+              console.log(data);
+              const players = [];
+              data.map(d => {
+                players.push({ ...d.payload.doc.data(), id: d.payload.doc.id });
+              });
+              return new LoadPlayersSuccess(players);
+            }),
             catchError(error => of(new HandleError({ error: error })))
           );
       }));
@@ -35,11 +42,9 @@ export class PlayerEffects {
     .pipe(
       ofType(PlayerActionTypes.LOAD_PLAYER),
       switchMap((action: LoadPlayer) => {
-        console.log(action);
         return this.playerService.loadPlayer(action.payload)
           .pipe(
             map((player: Player) => {
-              console.log(player);
               return new LoadPlayerSuccess(player);
             }),
             catchError(error => of(new HandleError({ error: error })))
@@ -53,7 +58,6 @@ export class PlayerEffects {
       switchMap((action: AddPlayer) => {
         return this.playerService.addPlayer(action.payload)
           .then((res: any) => {
-            console.log(res);
             return new AddPlayerSuccess(action.payload);
           })
           .catch(error => {

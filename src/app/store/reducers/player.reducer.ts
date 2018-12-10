@@ -39,5 +39,6 @@ export function reducer(state = initialState, action: PlayerActions): State {
 }
 
 export const getPlayers = (state: State) => state.players;
+export const getCurrentPlayer = (state: State) => state.currentPlayer;
 
 
