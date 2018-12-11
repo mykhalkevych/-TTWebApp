@@ -1,9 +1,10 @@
-import { Player } from './../../models/player.model';
-import { AppState, selectPlayers } from 'src/app/store/app.states';
 import { Store } from '@ngrx/store';
 import { Component, OnInit, OnDestroy } from '@angular/core';
-import { LoadPlayers } from 'src/app/store/actions/player.actions';
 import { Subscription } from 'rxjs';
+
+import { AppState, selectPlayers } from 'src/app/store/app.states';
+import { Player } from './../../models/player.model';
+import { LoadPlayers } from 'src/app/store/actions/player.actions';
 
 @Component({
   selector: 'app-home',

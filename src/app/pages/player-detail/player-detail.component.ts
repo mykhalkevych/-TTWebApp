@@ -1,13 +1,11 @@
 import { Subscription } from 'rxjs';
-import { selectCurrentPlayer } from './../../store/app.states';
 import { Component, OnInit, OnDestroy } from '@angular/core';
 import { ActivatedRoute } from '@angular/router';
 import { Store } from '@ngrx/store';
 
-import { Player } from 'src/app/models/player.model';
 import { AppState } from 'src/app/store/app.states';
 import { LoadPlayer } from 'src/app/store/actions/player.actions';
-import { AngularFirestore } from '@angular/fire/firestore';
+import { selectCurrentPlayer } from './../../store/app.states';
 
 @Component({
   selector: 'app-player-detail',
@@ -21,8 +19,7 @@ export class PlayerDetailComponent implements OnInit, OnDestroy {
   playerSubscription: Subscription;
   constructor(
     private route: ActivatedRoute,
-    private store: Store<AppState>,
-    private afs: AngularFirestore
+    private store: Store<AppState>
   ) { }
 
 

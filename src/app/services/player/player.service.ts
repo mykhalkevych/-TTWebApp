@@ -11,14 +11,15 @@ export class PlayerService {
   ) { }
 
   loadPlayers() {
-    return this.afs.collection('players').snapshotChanges();
+    return this.afs.collection('players').valueChanges();
   }
   loadPlayer(id) {
     return this.afs.doc<Player>(`players/${id}`).valueChanges();
   }
 
   addPlayer(player: Player) {
-    return this.afs.collection('players').add(player);
+    const playerRef = this.afs.collection('players').doc(player.id);
+    return playerRef.set(player);
   }
 
   updatePlayer(player: Player) {

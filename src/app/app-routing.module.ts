@@ -16,6 +16,10 @@ const routes: Routes = [
   {
     path: 'player/:id',
     component: PlayerDetailComponent
+  },
+  {
+    path: 'games',
+    loadChildren: './pages/games/games.module#GamesModule'
   }
 ];
 

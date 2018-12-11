@@ -26,14 +26,7 @@ export class PlayerEffects {
       mergeMap((action: LoadPlayers) => {
         return this.playerService.loadPlayers()
           .pipe(
-            map(data => {
-              console.log(data);
-              const players = [];
-              data.map(d => {
-                players.push({ ...d.payload.doc.data(), id: d.payload.doc.id });
-              });
-              return new LoadPlayersSuccess(players);
-            }),
+            map((players: Array<Player>) => new LoadPlayersSuccess(players)),
             catchError(error => of(new HandleError({ error: error })))
           );
       }));
@@ -44,9 +37,7 @@ export class PlayerEffects {
       switchMap((action: LoadPlayer) => {
         return this.playerService.loadPlayer(action.payload)
           .pipe(
-            map((player: Player) => {
-              return new LoadPlayerSuccess(player);
-            }),
+            map((player: Player) => new LoadPlayerSuccess(player)),
             catchError(error => of(new HandleError({ error: error })))
           );
       }));
