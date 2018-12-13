@@ -39,7 +39,7 @@ export class AuthEffects {
         this.store.dispatch(new StartLoading());
         return this.authService.login(action.payload)
           .then((user: any) => {
-            return new LogInSuccess(user);
+            return new LogInSuccess(user.user);
           })
           .catch(error => {
             return new HandleError({ error: error });

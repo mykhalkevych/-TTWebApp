@@ -60,6 +60,18 @@
           </mat-list-item>
         </mat-list>
       </mat-card>
+      <h3 class="mat-h2">Last Games</h3>
+      <mat-card>
+        <mat-list>
+          <mat-list-item *ngFor="let player of players; let i = index" [routerLink]="['player', player.id]">
+            <span class="number">{{i+1+'. '}}</span>
+            <img matListAvatar src="{{player.avatar || './assets/images/avatar.jpg'}}" alt="{{player.name}}">
+            <h3 matLine> {{player.name}} </h3>
+            <span class="level">{{player.level}}</span>
+          </mat-list-item>
+        </mat-list>
+      </mat-card>
+
     </div>
   </div>
 </div>

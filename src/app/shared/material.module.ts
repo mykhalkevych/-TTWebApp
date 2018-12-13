@@ -15,7 +15,8 @@ import {
   MatDialogRef,
   MatCardModule,
   MatTableModule,
-  MatExpansionModule
+  MatExpansionModule,
+  MatTabsModule
 } from '@angular/material';
 
 const MATERIAL_COMPONENTS = [
@@ -32,7 +33,8 @@ const MATERIAL_COMPONENTS = [
   MatInputModule,
   MatCardModule,
   MatTableModule,
-  MatExpansionModule
+  MatExpansionModule,
+  MatTabsModule
 ];
 
 @NgModule({

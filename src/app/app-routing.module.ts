@@ -20,6 +20,14 @@ const routes: Routes = [
   {
     path: 'games',
     loadChildren: './pages/games/games.module#GamesModule'
+  },
+  {
+    path: 'rating',
+    loadChildren: './pages/rating/rating.module#RatingModule'
+  },
+  {
+    path: 'admin',
+    loadChildren: './pages/admin/admin.module#AdminModule'
   }
 ];
 

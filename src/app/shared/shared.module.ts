@@ -21,7 +21,10 @@ import { RegistrationDialogComponent } from './components/dialog/registration-di
     HeaderComponent,
     FooterComponent,
     SidebarComponent,
-    LoginDialogComponent
+    LoginDialogComponent,
+    MaterialModule,
+    FormsModule,
+    ReactiveFormsModule
   ],
   entryComponents: [LoginDialogComponent, RegistrationDialogComponent],
   imports: [

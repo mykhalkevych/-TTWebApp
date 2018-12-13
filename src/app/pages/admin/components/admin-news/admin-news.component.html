@@ -1,0 +1,10 @@
+<form class="news-form" [formGroup]="newsForm" novalidate (submit)="publishNews()">
+    <mat-form-field class="news-full-width">
+      <input matInput placeholder="News title" formControlName="title">
+    </mat-form-field>
+
+    <mat-form-field class="news-full-width">
+      <textarea matInput placeholder="News text" formControlName="text"></textarea>
+    </mat-form-field>
+    <button type="submit" color="accent" mat-button>Publish</button>
+  </form>
