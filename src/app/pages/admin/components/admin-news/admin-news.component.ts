@@ -1,5 +1,7 @@
 import { FormBuilder, FormGroup, Validators } from '@angular/forms';
 import { Component, OnInit } from '@angular/core';
+import { Store } from '@ngrx/store';
+import { AppState } from 'src/app/store/app.states';
 
 @Component({
   selector: 'app-admin-news',
@@ -11,11 +13,13 @@ export class AdminNewsComponent implements OnInit {
   newsForm: FormGroup;
 
   constructor(
-    private fb: FormBuilder
+    private fb: FormBuilder,
+    private srote: Store<AppState>
   ) {
     this.newsForm = this.fb.group({
       title: ['', Validators.required],
-      text: ['', Validators.required]
+      text: ['', Validators.required],
+      likes: [0, Validators.required]
     });
   }
 
