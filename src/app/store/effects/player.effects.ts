@@ -1,5 +1,5 @@
 import { Player } from './../../models/player.model';
-import { LoadPlayers, LoadPlayer, LoadPlayerSuccess } from 'src/app/store/actions/player.actions';
+import { LoadPlayer, LoadPlayerSuccess } from 'src/app/store/actions/player.actions';
 import { Injectable } from '@angular/core';
 import { Actions, Effect, ofType } from '@ngrx/effects';
 import { switchMap, map, catchError, mergeMap } from 'rxjs/operators';
@@ -23,7 +23,7 @@ export class PlayerEffects {
   LoadPlayers: Observable<any> = this.actions
     .pipe(
       ofType(PlayerActionTypes.LOAD_PLAYERS),
-      mergeMap((action: LoadPlayers) => {
+      mergeMap(_ => {
         return this.playerService.loadPlayers()
           .pipe(
             map((players: Array<Player>) => new LoadPlayersSuccess(players)),

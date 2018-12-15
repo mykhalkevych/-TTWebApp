@@ -6,7 +6,11 @@ export enum NewsActionTypes {
   LOAD_NEWS = '[News] Load News',
   LOAD_NEWS_SUCCESS = '[News] Load News Success',
   ADD_NEWS = '[News] Add News',
-  ADD_NEWS_SUCCESS = '[News] Add News success'
+  ADD_NEWS_SUCCESS = '[News] Add News success',
+  UPDATE_NEWS = '[News] Update News',
+  UPDATE_NEWS_SUCCESS = '[News] Update News success',
+  DELETE_NEWS = '[News] Delete News',
+  DELETE_NEWS_SUCCESS = '[News] Delete News success'
 }
 
 export class LoadNews implements Action {
@@ -28,9 +32,33 @@ export class AddNewsSuccess implements Action {
   constructor(public payload: News) { }
 }
 
+export class UpdateNews implements Action {
+  readonly type = NewsActionTypes.ADD_NEWS;
+  constructor(public payload: News) { }
+}
+
+export class UpdateNewsSuccess implements Action {
+  readonly type = NewsActionTypes.UPDATE_NEWS_SUCCESS;
+  constructor(public payload: News) { }
+}
+
+export class DeleteNews implements Action {
+  readonly type = NewsActionTypes.DELETE_NEWS;
+  constructor(public payload: News) { }
+}
+
+export class DeleteNewsSuccess implements Action {
+  readonly type = NewsActionTypes.DELETE_NEWS_SUCCESS;
+  constructor(public payload: News) { }
+}
+
 
 export type NewsActions =
   | LoadNews
   | LoadNewsSuccess
   | AddNews
-  | AddNewsSuccess;
+  | AddNewsSuccess
+  | UpdateNews
+  | UpdateNewsSuccess
+  | DeleteNews
+  | DeleteNewsSuccess;

@@ -1,3 +1,4 @@
+import { NewsEffects } from './store/effects/news.effects';
 import { AngularFirestoreModule } from '@angular/fire/firestore';
 import { PlayerEffects } from './store/effects/player.effects';
 import { BrowserModule } from '@angular/platform-browser';
@@ -40,7 +41,7 @@ import { PlayerDetailComponent } from './pages/player-detail/player-detail.compo
     SharedModule,
     AppRoutingModule,
     StoreModule.forRoot(reducers),
-    EffectsModule.forRoot([AuthEffects, SharedEffects, PlayerEffects]),
+    EffectsModule.forRoot([AuthEffects, SharedEffects, PlayerEffects, NewsEffects]),
     StoreDevtoolsModule.instrument(),
   ],
   bootstrap: [AppComponent]

@@ -1,5 +1,5 @@
 import { News } from '../../models/News.model';
-import { NewsActionTypes, NewsActions } from '../actions/News.actions';
+import { NewsActionTypes, NewsActions } from '../actions/news.actions';
 
 export interface State {
   news: Array<News>;
@@ -22,6 +22,18 @@ export function reducer(state = initialState, action: NewsActions): State {
       return {
         ...state,
         news: [...state.news, action.payload]
+      };
+    }
+    case NewsActionTypes.UPDATE_NEWS_SUCCESS: {
+      return {
+        ...state,
+        news: state.news.map(newsItem => newsItem.id === action.payload.id ? action.payload : newsItem)
+      };
+    }
+    case NewsActionTypes.DELETE_NEWS_SUCCESS: {
+      return {
+        ...state,
+        news: state.news.filter(newsItem => newsItem.id !== action.payload.id)
       };
     }
     default: {

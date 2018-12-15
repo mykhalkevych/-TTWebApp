@@ -1,3 +1,6 @@
+import { News } from './../../../../models/news.model';
+import { selectNews } from './../../../../store/app.states';
+import { AddNews, LoadNews, UpdateNews, DeleteNews } from './../../../../store/actions/news.actions';
 import { FormBuilder, FormGroup, Validators } from '@angular/forms';
 import { Component, OnInit } from '@angular/core';
 import { Store } from '@ngrx/store';
@@ -11,12 +14,15 @@ import { AppState } from 'src/app/store/app.states';
 export class AdminNewsComponent implements OnInit {
 
   newsForm: FormGroup;
+  news: Array<News> = [];
+  isNewsEditing = false;
 
   constructor(
     private fb: FormBuilder,
-    private srote: Store<AppState>
+    private store: Store<AppState>
   ) {
     this.newsForm = this.fb.group({
+      id: [new Date().getTime().toString(), Validators.required],
       title: ['', Validators.required],
       text: ['', Validators.required],
       likes: [0, Validators.required]
@@ -24,13 +30,43 @@ export class AdminNewsComponent implements OnInit {
   }
 
   ngOnInit() {
+    this.store.dispatch(new LoadNews());
+    this.store.select(selectNews)
+      .subscribe(res => {
+        this.news = res;
+      });
   }
 
   publishNews() {
     if (this.newsForm.valid) {
       const newsData = this.newsForm.value;
-      console.log(newsData);
+      if (this.isNewsEditing) {
+        this.store.dispatch(new UpdateNews(newsData));
+        this.isNewsEditing = false;
+      } else {
+        this.store.dispatch(new AddNews(newsData));
+      }
+      this.resetNewsForm();
     }
+  }
+
+  resetNewsForm() {
+    this.newsForm.reset();
+    this.newsForm.markAsPristine();
+    this.newsForm.markAsUntouched();
+  }
+
+  setNewsForm(news) {
+    this.newsForm.setValue(news);
+  }
+
+  editNews(news) {
+    this.setNewsForm(news);
+    this.isNewsEditing = true;
+  }
+
+  deleteNews(news) {
+    this.store.dispatch(new DeleteNews(news));
   }
 
 }
