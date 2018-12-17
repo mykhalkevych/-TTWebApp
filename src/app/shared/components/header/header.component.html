@@ -17,14 +17,15 @@
         <mat-icon>menu</mat-icon>
       </button>
       <div>
+        <button mat-raised-button color="accent" (click)="openNewGameDialog()">New Game</button>
         <button mat-flat-button color="primary" (click)="logout()">
           Logout
         </button>
         <button class="user" mat-flat-button color="primary" [matMenuTriggerFor]="userMenu">
           <mat-icon>person</mat-icon>
           <mat-menu #userMenu="matMenu">
-            <button mat-menu-item>Item 1</button>
-            <button mat-menu-item>Item 2</button>
+            <button mat-menu-item>Profile</button>
+            <button mat-menu-item>Settings</button>
           </mat-menu>
         </button>
       </div>

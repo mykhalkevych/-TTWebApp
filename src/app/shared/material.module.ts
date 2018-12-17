@@ -17,7 +17,10 @@ import {
   MatTableModule,
   MatExpansionModule,
   MatTabsModule,
-  MatBadgeModule
+  MatBadgeModule,
+  MatSelectModule,
+  MatRadioModule,
+  MatSlideToggleModule
 } from '@angular/material';
 
 const MATERIAL_COMPONENTS = [
@@ -36,7 +39,10 @@ const MATERIAL_COMPONENTS = [
   MatTableModule,
   MatExpansionModule,
   MatTabsModule,
-  MatBadgeModule
+  MatBadgeModule,
+  MatSelectModule,
+  MatRadioModule,
+  MatSlideToggleModule
 ];
 
 @NgModule({

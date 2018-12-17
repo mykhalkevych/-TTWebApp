@@ -6,6 +6,8 @@ import * as auth from 'src/app/store/reducers/auth.reducer';
 import { MatDialog } from '@angular/material';
 import { LoginDialogComponent } from 'src/app/shared/components/dialog/login-dialog/login-dialog.component';
 import { RegistrationDialogComponent } from '../dialog/registration-dialog/registration-dialog.component';
+import { NewGameDialogComponent } from '../dialog/new-game-dialog/new-game-dialog.component';
+import { SettingDialogComponent } from '../dialog/setting-dialog/setting-dialog.component';
 
 
 @Component({
@@ -45,6 +47,18 @@ export class HeaderComponent implements OnInit {
 
   logout() {
     this.store.dispatch(new LogOut());
+  }
+
+  openNewGameDialog() {
+    this.dialog.open(NewGameDialogComponent, {
+      width: '400px'
+    });
+  }
+
+  openSettigs() {
+    this.dialog.open(SettingDialogComponent, {
+      width: '400px'
+    });
   }
 
 }

@@ -1,0 +1,38 @@
+<h2 class="mat-dialog-title">Create game reguest</h2>
+
+<form class="popup-form" [formGroup]="newGameForm" novalidate (ngSubmit)="sendGameRequest()">
+
+  <mat-form-field class="full-width">
+    <mat-select placeholder="Select oponents" formControlName="oponents" multiple>
+      <mat-option *ngFor="let player of players" [value]="player">{{player.name}}</mat-option>
+    </mat-select>
+    <mat-error *ngIf="newGameForm.controls['oponents'].hasError('required')">
+      Please choose <strong>opponents</strong>
+    </mat-error>
+  </mat-form-field>
+  <mat-slide-toggle formControlName="double">Double</mat-slide-toggle>
+  <p>Choose game type</p>
+  <mat-radio-group formControlName="gameType">
+    <mat-radio-button value="small">
+      Small (11 points)
+    </mat-radio-button>
+    <mat-radio-button value="big">
+      Big (21 points)
+    </mat-radio-button>
+  </mat-radio-group>
+  <p>Choose game type</p>
+  <mat-radio-group formControlName="gameType">
+    <mat-radio-button value="small">
+      Small (11 points)
+    </mat-radio-button>
+    <mat-radio-button value="big">
+      Big (21 points)
+    </mat-radio-button>
+  </mat-radio-group>
+
+  <div mat-dialog-actions>
+    <button mat-raised-button (click)="closeDialog()">Cancel</button>
+    <button mat-raised-button color="primary" type="submit">Send game request</button>
+  </div>
+
+</form>
