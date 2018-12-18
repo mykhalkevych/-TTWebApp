@@ -33,7 +33,6 @@ export class NewGameDialogComponent implements OnInit {
     this.newGameForm = this.fb.group({
       double: [true, Validators.required],
       gameType: ['small', Validators.required],
-      gamesCount: [5, Validators.required],
       oponents: [[], Validators.required]
     });
   }
