@@ -22,6 +22,7 @@ import { RulesComponent } from './pages/rules/rules.component';
 import { StoreDevtoolsModule } from '@ngrx/store-devtools';
 import { SharedEffects } from './store/effects/shared.effects';
 import { PlayerDetailComponent } from './pages/player-detail/player-detail.component';
+import { ProfileComponent } from './pages/profile/profile.component';
 
 
 @NgModule({
@@ -29,7 +30,8 @@ import { PlayerDetailComponent } from './pages/player-detail/player-detail.compo
     AppComponent,
     HomeComponent,
     RulesComponent,
-    PlayerDetailComponent
+    PlayerDetailComponent,
+    ProfileComponent
   ],
   imports: [
     BrowserModule,

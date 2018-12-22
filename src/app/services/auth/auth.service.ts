@@ -1,26 +1,29 @@
+import { UpdateAuthState } from './../../store/actions/auth.action';
+import { AppState } from './../../store/app.states';
 import { Injectable } from '@angular/core';
 import { AngularFireAuth } from '@angular/fire/auth';
 import * as firebase from 'firebase/app';
 import { Observable } from 'rxjs';
+import { Store } from '@ngrx/store';
+import { LogOut } from 'src/app/store/actions/auth.action';
 
 @Injectable({
   providedIn: 'root'
 })
 export class AuthService {
   private user: Observable<firebase.User>;
-  private userDetails: firebase.User = null;
 
   constructor(
     private afAuth: AngularFireAuth,
+    private store: Store<AppState>
   ) {
     this.user = afAuth.authState;
     this.user.subscribe(
       (user) => {
         if (user) {
-          this.userDetails = user;
-          console.log(this.userDetails);
+          this.store.dispatch(new UpdateAuthState(user));
         } else {
-          this.userDetails = null;
+          this.store.dispatch(new LogOut());
         }
       }
     );
@@ -28,6 +31,10 @@ export class AuthService {
 
   isLoggedIn() {
     return !!localStorage.getItem('token');
+  }
+
+  getCurrentUser() {
+    return this.afAuth.user;
   }
 
   signUp(user) {
@@ -40,7 +47,11 @@ export class AuthService {
     return this.afAuth.auth.signInWithEmailAndPassword(email, password);
   }
 
+  updateUser(user: firebase.User) {
+    return this.afAuth.auth.updateCurrentUser(user);
+  }
+
   logout() {
-    this.afAuth.auth.signOut();
+    return this.afAuth.auth.signOut();
   }
 }

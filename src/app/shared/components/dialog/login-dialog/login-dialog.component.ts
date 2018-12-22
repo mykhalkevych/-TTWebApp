@@ -23,7 +23,8 @@ export class LoginDialogComponent implements OnInit {
     @Inject(MAT_DIALOG_DATA) public data: any
   ) { }
 
-  closeDialog(): void {
+  closeDialog(e): void {
+    e.preventDefault();
     this.dialogRef.close();
   }
 

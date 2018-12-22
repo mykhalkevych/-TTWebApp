@@ -24,7 +24,7 @@
           </span>
           <mat-icon>keyboard_arrow_down</mat-icon>
           <mat-menu #userMenu="matMenu">
-            <button mat-menu-item>Profile</button>
+            <button mat-menu-item [routerLink]="['/profile']" routerLinkActive="router-link-active" >Profile</button>
             <button mat-menu-item>Settings</button>
             <button mat-menu-item (click)="logout()">Logout</button>
           </mat-menu>

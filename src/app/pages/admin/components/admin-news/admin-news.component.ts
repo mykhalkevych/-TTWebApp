@@ -51,9 +51,16 @@ export class AdminNewsComponent implements OnInit {
   }
 
   resetNewsForm() {
-    this.newsForm.reset();
-    this.newsForm.markAsPristine();
+    this.newsForm.controls['id'].setValue(new Date().getTime().toString());
+    this.newsForm.controls['likes'].setValue(0);
+    this.newsForm.controls['title'].setValue('');
+    // this.newsForm.controls['text'].setValue('');
+    // this.newsForm.clearValidators();
+    this.newsForm.controls['title'].markAsPristine();
+    this.newsForm.controls['title'].markAsUntouched();
+    this.newsForm.controls['title'].updateValueAndValidity();
     this.newsForm.markAsUntouched();
+    this.newsForm.updateValueAndValidity();
   }
 
   setNewsForm(news) {

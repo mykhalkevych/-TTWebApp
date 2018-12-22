@@ -1,9 +1,10 @@
+import { LogOutSuccess } from './../actions/auth.action';
 import { StopLoading } from './../actions/shared.action';
 import { Player } from './../../models/player.model';
 import { Injectable } from '@angular/core';
 import { Router } from '@angular/router';
 import { Actions, Effect, ofType } from '@ngrx/effects';
-import { tap, switchMap, map } from 'rxjs/operators';
+import { tap, switchMap, map, mergeMap } from 'rxjs/operators';
 import { Observable } from 'rxjs';
 import { Store } from '@ngrx/store';
 import { MatDialog } from '@angular/material';
@@ -54,7 +55,7 @@ export class AuthEffects {
         this.store.dispatch(new StopLoading());
         localStorage.setItem('token', user.payload.token);
         this.dialog.closeAll();
-        this.router.navigateByUrl('/');
+        this.router.navigateByUrl('/profile');
       })
     );
 
@@ -66,7 +67,8 @@ export class AuthEffects {
       switchMap((payload: any) => {
         return this.authService.signUp(payload)
           .then(res => {
-            res.user['userName'] = payload.name;
+            res.user.sendEmailVerification();
+            res.user.updateProfile({ displayName: payload.name, photoURL: null });
             return new SignUpSuccess(res);
           })
           .catch(error => {
@@ -84,7 +86,7 @@ export class AuthEffects {
         const user = data.payload.user;
         const player: Player = {
           id: user.uid,
-          name: user.userName,
+          name: user.displayName,
           email: user.email,
           level: 1
         };
@@ -97,12 +99,19 @@ export class AuthEffects {
       })
     );
 
-  @Effect({ dispatch: false })
-  public LogOut: Observable<any> = this.actions
+  @Effect()
+  LogOut: Observable<any> = this.actions
     .pipe(
       ofType(AuthActionTypes.LOGOUT),
-      tap((user) => {
-        localStorage.removeItem('token');
+      mergeMap(_ => {
+        return this.authService.logout()
+          .then(res => {
+            localStorage.removeItem('token');
+            return new LogOutSuccess();
+          })
+          .catch(error => {
+            return new HandleError({ error: error });
+          });
       })
     );
 }

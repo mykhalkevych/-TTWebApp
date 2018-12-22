@@ -20,7 +20,8 @@ export class RegistrationDialogComponent implements OnInit {
     private store: Store<AppState>
   ) { }
 
-  closeDialog(): void {
+  closeDialog(e): void {
+    e.preventDefault();
     this.dialogRef.close();
   }
 

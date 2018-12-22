@@ -35,7 +35,7 @@ export class SharedEffects {
 
         const errMsg = error.payload.error.message;
         this.snackBar.open(errMsg, 'Ok', {
-          duration: 2500
+          duration: 8000
         });
 
         // remap to noop Action if no state needs to be updated.

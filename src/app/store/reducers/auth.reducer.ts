@@ -1,3 +1,4 @@
+import { AuthService } from './../../services/auth/auth.service';
 import { User } from 'src/app/models/user.model';
 import { AuthActionTypes, All } from '../actions/auth.action';
 
@@ -5,12 +6,12 @@ export interface State {
   // is a user authenticated?
   isAuthenticated: boolean;
   // if authenticated, there should be a user object
-  user: User | null;
+  user: User;
 }
 
 export const initialState: State = {
   isAuthenticated: !!localStorage.getItem('token'),
-  user: null
+  user: {}
 };
 
 export function reducer(state = initialState, action: All): State {
@@ -21,7 +22,8 @@ export function reducer(state = initialState, action: All): State {
         isAuthenticated: true,
         user: {
           id: action.payload.uid,
-          email: action.payload.email
+          email: action.payload.email,
+          ...action.payload
         }
       };
     }
@@ -30,11 +32,17 @@ export function reducer(state = initialState, action: All): State {
         ...state,
       };
     }
-    case AuthActionTypes.LOGOUT: {
+    case AuthActionTypes.UPDATE_AUTH_STATE: {
+      return {
+        ...state,
+        user: { ...action.payload }
+      };
+    }
+    case AuthActionTypes.LOGOUT_SUCCESS: {
       return {
         ...state,
         isAuthenticated: false,
-        user: null
+        user: {}
       };
     }
     default: {
@@ -44,3 +52,4 @@ export function reducer(state = initialState, action: All): State {
 }
 
 export const getIsAuthenticated = (state: State) => state.isAuthenticated;
+export const getCurrentUser = (state: State) => state.user;

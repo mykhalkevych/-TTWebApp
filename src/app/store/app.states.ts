@@ -20,6 +20,7 @@ export const reducers: ActionReducerMap<AppState> = {
 
 export const selectAuthState = createFeatureSelector<fromAuth.State>('authState');
 export const getIsAuthenticated = createSelector(selectAuthState, fromAuth.getIsAuthenticated);
+export const getCurrentUser = createSelector(selectAuthState, fromAuth.getCurrentUser);
 
 export const selectSharedState = createFeatureSelector<fromShared.State>('sharedState');
 export const getIsLoading = createSelector(selectSharedState, fromShared.getIsloading);
