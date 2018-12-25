@@ -24,8 +24,7 @@ export class AdminNewsComponent implements OnInit {
     this.newsForm = this.fb.group({
       id: [new Date().getTime().toString(), Validators.required],
       title: ['', Validators.required],
-      text: ['', Validators.required],
-      likes: [0, Validators.required]
+      text: ['', Validators.required]
     });
   }
 

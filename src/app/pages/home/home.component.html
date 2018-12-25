@@ -9,11 +9,11 @@
             <p> {{itemNews.text}} </p>
           </mat-card-content>
           <mat-card-actions>
-            <button mat-icon-button color="primary">
-              <mat-icon [matBadge]="itemNews.likes || null" matBadgePosition="after" matBadgeColor="basic">thumb_up</mat-icon>
+            <button mat-icon-button color="primary" (click)="likeNews(itemNews)" >
+              <mat-icon [matBadge]="itemNews.likes?.length || null" matBadgePosition="after" matBadgeColor="basic">thumb_up</mat-icon>
             </button>
-            <button mat-icon-button color="warn">
-              <mat-icon [matBadge]="itemNews.likes || null" matBadgePosition="after" matBadgeColor="accent">thumb_down</mat-icon>
+            <button mat-icon-button color="warn" (click)="dislikeNews(itemNews)">
+              <mat-icon [matBadge]="itemNews.dislikes?.length || null" matBadgePosition="after" matBadgeColor="accent">thumb_down</mat-icon>
             </button>
           </mat-card-actions>
         </mat-card>
