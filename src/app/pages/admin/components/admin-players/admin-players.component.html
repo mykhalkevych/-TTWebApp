@@ -1,3 +1,11 @@
-<p>
-  admin-players works!
-</p>
+<div class="col-md-12">
+  <ul class="list-group list-group-flush">
+    <li class="list-group-item" *ngFor="let player of players">{{player.name}}
+      <div class="actions">
+        <button mat-icon-button color="warn" (click)="deletePlayer(player)">
+          <mat-icon>close</mat-icon>
+        </button>
+      </div>
+    </li>
+  </ul>
+</div>

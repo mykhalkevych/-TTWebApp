@@ -37,32 +37,31 @@ export class NewsEffects {
           );
       }));
 
-  @Effect({dispatch: false})
+  @Effect({ dispatch: false })
   AddNews: Observable<any> = this.actions
     .pipe(
       ofType(NewsActionTypes.ADD_NEWS),
       switchMap((action: AddNews) => {
-        this.store.dispatch(new StartLoading());
+        // this.store.dispatch(new StartLoading());
         return this.newsService.addNews(action.payload)
           .then(_ => {
             this.store.dispatch(new StopLoading());
-            // return new AddNewsSuccess(action.payload);
+            return new AddNewsSuccess(action.payload);
           })
           .catch(error => {
             return new HandleError({ error: error });
           });
       })
     );
-  @Effect()
+  @Effect({ dispatch: false })
   UpdateNews: Observable<any> = this.actions
     .pipe(
       ofType(NewsActionTypes.UPDATE_NEWS),
       switchMap((action: UpdateNews) => {
-        this.store.dispatch(new StartLoading());
         return this.newsService.updateNews(action.payload)
           .then(_ => {
-            this.store.dispatch(new StopLoading());
-            return new UpdateNewsSuccess(action.payload);
+            // this.store.dispatch(new StopLoading());
+            // return new UpdateNewsSuccess(action.payload);
           })
           .catch(error => {
             return new HandleError({ error: error });

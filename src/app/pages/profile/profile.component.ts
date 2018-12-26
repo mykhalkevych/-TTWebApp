@@ -1,7 +1,12 @@
 import { User } from './../../models/user.model';
-import { AppState, getCurrentUser } from 'src/app/store/app.states';
+import { AppState, getCurrentUser, selectCurrentPlayer } from 'src/app/store/app.states';
 import { Store } from '@ngrx/store';
 import { Component, OnInit } from '@angular/core';
+import { AngularFireStorage } from '@angular/fire/storage';
+import { finalize } from 'rxjs/operators';
+import { LoadPlayer } from 'src/app/store/actions/player.actions';
+import { Player } from 'src/app/models/player.model';
+import { UpdateAuthState } from 'src/app/store/actions/auth.action';
 
 @Component({
   selector: 'app-profile',
@@ -11,13 +16,20 @@ import { Component, OnInit } from '@angular/core';
 export class ProfileComponent implements OnInit {
 
   userInfo: User = {};
+  playerInfo: Player = {};
 
   constructor(
-    private store: Store<AppState>
+    private store: Store<AppState>,
+    private storage: AngularFireStorage
   ) {
     this.store.select(getCurrentUser)
       .subscribe((user: User) => {
         this.userInfo = user;
+        this.store.dispatch(new LoadPlayer(user.uid));
+      });
+    this.store.select(selectCurrentPlayer)
+      .subscribe(res => {
+        console.log(res);
       });
   }
 
@@ -25,4 +37,21 @@ export class ProfileComponent implements OnInit {
 
   }
 
+  fileChangeEvent(e) {
+    const file = e.target.files[0];
+    if (file) {
+      const filePath = `avatars/${this.userInfo.uid}`;
+      const fileRef = this.storage.ref(filePath);
+      const task = this.storage.upload(filePath, file);
+      task.snapshotChanges().pipe(
+        finalize(() => fileRef.getDownloadURL().subscribe(res => {
+          console.log(res);
+          this.userInfo.photoURL = res;
+        }))
+      ).subscribe();
+    }
+  }
+  updateProfile() {
+    this.store.dispatch(new UpdateAuthState(this.userInfo));
+  }
 }

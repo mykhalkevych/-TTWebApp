@@ -12,6 +12,7 @@ import { StoreModule } from '@ngrx/store';
 import { SharedModule } from './shared/shared.module';
 
 import { AngularFireModule } from '@angular/fire';
+import { AngularFireStorageModule } from '@angular/fire/storage';
 import { environment } from '../environments/environment';
 import { AngularFireAuthModule } from '@angular/fire/auth';
 import { MaterialModule } from './shared/material.module';
@@ -39,6 +40,7 @@ import { ProfileComponent } from './pages/profile/profile.component';
     AngularFireModule.initializeApp(environment.firebase),
     AngularFireAuthModule,
     AngularFirestoreModule,
+    AngularFireStorageModule,
     MaterialModule,
     SharedModule,
     AppRoutingModule,

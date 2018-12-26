@@ -1,4 +1,4 @@
-import { LogOutSuccess } from './../actions/auth.action';
+import { LogOutSuccess, UpdateAuthState } from './../actions/auth.action';
 import { StopLoading } from './../actions/shared.action';
 import { Player } from './../../models/player.model';
 import { Injectable } from '@angular/core';
@@ -97,6 +97,22 @@ export class AuthEffects {
           width: '400px'
         });
       })
+    );
+
+  @Effect({ dispatch: false })
+  UpdateAuthState: Observable<any> = this.actions
+    .pipe(
+      ofType(AuthActionTypes.UPDATE_AUTH_STATE),
+      map((action: UpdateAuthState) => action.payload),
+      switchMap((payload: any) => {
+        return this.authService.updateUser(payload)
+          .then(res => {
+            console.log(res);
+          })
+          .catch(error => {
+            return new HandleError({ error: error });
+          });
+      }),
     );
 
   @Effect()

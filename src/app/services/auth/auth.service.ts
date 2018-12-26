@@ -12,7 +12,7 @@ import { LogOut } from 'src/app/store/actions/auth.action';
 })
 export class AuthService {
   private user: Observable<firebase.User>;
-
+  private authUser: firebase.User;
   constructor(
     private afAuth: AngularFireAuth,
     private store: Store<AppState>
@@ -21,6 +21,7 @@ export class AuthService {
     this.user.subscribe(
       (user) => {
         if (user) {
+          this.authUser = user;
           this.store.dispatch(new UpdateAuthState(user));
         } else {
           this.store.dispatch(new LogOut());
@@ -47,8 +48,8 @@ export class AuthService {
     return this.afAuth.auth.signInWithEmailAndPassword(email, password);
   }
 
-  updateUser(user: firebase.User) {
-    return this.afAuth.auth.updateCurrentUser(user);
+  updateUser(userData) {
+    return this.authUser.updateProfile(userData);
   }
 
   logout() {

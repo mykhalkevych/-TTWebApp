@@ -35,3 +35,11 @@
     margin-left: 15px;
   }
 }
+.list-group-item {
+  position: relative;
+  .actions {
+    position: absolute;
+    right: 0;
+    top: 4px;
+  }
+}

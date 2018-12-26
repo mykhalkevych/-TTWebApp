@@ -33,7 +33,7 @@ export class AddNewsSuccess implements Action {
 }
 
 export class UpdateNews implements Action {
-  readonly type = NewsActionTypes.ADD_NEWS;
+  readonly type = NewsActionTypes.UPDATE_NEWS;
   constructor(public payload: News) { }
 }
 

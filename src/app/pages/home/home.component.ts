@@ -5,7 +5,7 @@ import { Store } from '@ngrx/store';
 import { Component, OnInit, OnDestroy } from '@angular/core';
 import { Subscription } from 'rxjs';
 
-import { AppState, selectPlayers, selectNews, getCurrentUser } from 'src/app/store/app.states';
+import { AppState, selectPlayers, selectNews, getCurrentUser, getIsAuthenticated } from 'src/app/store/app.states';
 import { Player } from './../../models/player.model';
 import { LoadPlayers } from 'src/app/store/actions/player.actions';
 import { News } from 'src/app/models/news.model';
@@ -22,6 +22,7 @@ export class HomeComponent implements OnInit, OnDestroy {
   news: Array<News> = [];
   currentUser: User;
   likeObj: Likes;
+  isUserLoggedIn = false;
 
   playersSubscription: Subscription;
 
@@ -37,7 +38,12 @@ export class HomeComponent implements OnInit, OnDestroy {
       });
     this.store.select(selectNews)
       .subscribe(res => {
+        console.log(res);
         this.news = res;
+      });
+    this.store.select(getIsAuthenticated)
+      .subscribe(res => {
+        this.isUserLoggedIn = res;
       });
 
     this.store.select(getCurrentUser)

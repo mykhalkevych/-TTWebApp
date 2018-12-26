@@ -20,11 +20,11 @@
         <button mat-raised-button color="accent" (click)="openNewGameDialog()">New Game</button>
         <button class="user" mat-flat-button color="primary" [matMenuTriggerFor]="userMenu">
           <span class="user-avatar">
-            <img src="{{'' || './assets/images/avatar.jpg'}}" alt="...">
+            <img src="{{user.photoURL || './assets/images/avatar.jpg'}}" alt="...">
           </span>
           <mat-icon>keyboard_arrow_down</mat-icon>
           <mat-menu #userMenu="matMenu">
-            <button mat-menu-item [routerLink]="['/profile']" routerLinkActive="router-link-active" >Profile</button>
+            <button mat-menu-item [routerLink]="['/profile']" routerLinkActive="router-link-active">Profile</button>
             <button mat-menu-item>Settings</button>
             <button mat-menu-item (click)="logout()">Logout</button>
           </mat-menu>
