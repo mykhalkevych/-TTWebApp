@@ -20,7 +20,8 @@ import {
   MatBadgeModule,
   MatSelectModule,
   MatRadioModule,
-  MatSlideToggleModule
+  MatSlideToggleModule,
+  MatAutocompleteModule
 } from '@angular/material';
 
 const MATERIAL_COMPONENTS = [
@@ -42,7 +43,8 @@ const MATERIAL_COMPONENTS = [
   MatBadgeModule,
   MatSelectModule,
   MatRadioModule,
-  MatSlideToggleModule
+  MatSlideToggleModule,
+  MatAutocompleteModule
 ];
 
 @NgModule({

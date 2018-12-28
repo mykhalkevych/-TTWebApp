@@ -1,3 +1,60 @@
-<p>
-  admin-games works!
-</p>
+<div class="col-sm-12">
+  <div class="row">
+    <div class="col-md-6">
+      <form class="news-form" [formGroup]="gameForm" novalidate (submit)="createGame()">
+        <div class="col">
+
+          <mat-form-field class="example-full-width">
+            <input type="text" placeholder="Tournament" aria-label="Assignee" matInput formControlName="tournament"
+              [matAutocomplete]="auto">
+            <mat-autocomplete #auto="matAutocomplete">
+              <mat-option *ngFor="let option of tournaments" [value]="option">
+                {{option}}
+              </mat-option>
+            </mat-autocomplete>
+          </mat-form-field>
+          <p>
+            <mat-slide-toggle formControlName="double">Double</mat-slide-toggle>
+          </p>
+          <mat-radio-group formControlName="gameType">
+            <mat-radio-button value="small">
+              Small (11 points)
+            </mat-radio-button>
+            <mat-radio-button value="big">
+              Big (21 points)
+            </mat-radio-button>
+          </mat-radio-group>
+          <mat-form-field class="full-width">
+            <mat-select placeholder="Firsr Player" formControlName="firstPlayer" (valueChange)="filterPlayers($event)">
+              <mat-option value="null">None</mat-option>
+              <mat-option *ngFor="let player of filteredPlayers" [value]="player">{{player.name}}</mat-option>
+            </mat-select>
+          </mat-form-field>
+          <mat-form-field class="full-width">
+            <mat-select placeholder="Second Player" formControlName="secondPlayer">
+              <mat-option value="null">None</mat-option>
+              <mat-option *ngFor="let player of filteredPlayers" [value]="player">{{player.name}}</mat-option>
+            </mat-select>
+          </mat-form-field>
+          <div>
+            <button type="submit" mat-raised-button color="accent">Create Game</button>
+          </div>
+        </div>
+      </form>
+    </div>
+    <!-- <div class="col-md-6">
+      <ul class="list-group list-group-flush">
+        <li class="list-group-item" *ngFor="let itemNews of news">{{itemNews.title}}
+          <div class="actions">
+            <button mat-icon-button color="accent" (click)="editNews(itemNews)">
+              <mat-icon>edit</mat-icon>
+            </button>
+            <button mat-icon-button color="warn" (click)="deleteNews(itemNews)">
+              <mat-icon>close</mat-icon>
+            </button>
+          </div>
+        </li>
+      </ul>
+    </div> -->
+  </div>
+</div>
