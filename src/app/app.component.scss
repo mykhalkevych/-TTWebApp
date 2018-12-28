@@ -31,10 +31,11 @@
 }
 
 .mat-radio-button {
-  & + .mat-radio-button {
+  &+.mat-radio-button {
     margin-left: 15px;
   }
 }
+
 .list-group-item {
   position: relative;
   .actions {
@@ -43,6 +44,7 @@
     top: 4px;
   }
 }
+
 .user-avatar {
   img {
     width: 50px;
@@ -53,6 +55,10 @@
     -ms-border-radius: 50%;
     -o-border-radius: 50%;
   }
+}
+
+mat-card {
+  margin-top: 15px;
 }
 
 .player-level {

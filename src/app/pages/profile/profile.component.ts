@@ -29,7 +29,9 @@ export class ProfileComponent implements OnInit {
       });
     this.store.select(selectCurrentPlayer)
       .subscribe(res => {
-        console.log(res);
+        if (res) {
+          this.playerInfo = res;
+        }
       });
   }
 
