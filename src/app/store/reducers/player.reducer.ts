@@ -32,6 +32,12 @@ export function reducer(state = initialState, action: PlayerActions): State {
         players: [...state.players, action.payload]
       };
     }
+    case PlayerActionTypes.DELETE_PLAYER_SUCCESS: {
+      return {
+        ...state,
+        players: state.players.filter(player => player.id !== action.payload.id)
+      };
+    }
     default: {
       return state;
     }

@@ -25,4 +25,8 @@ export class PlayerService {
   updatePlayer(player: Player) {
     return this.afs.doc<Player>(`players/${player.id}`).update(player);
   }
+
+  deletePlayer(player: Player) {
+    return this.afs.doc<Player>(`players/${player.id}`).delete();
+  }
 }

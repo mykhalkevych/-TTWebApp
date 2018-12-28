@@ -11,7 +11,9 @@ export interface State {
 
 export const initialState: State = {
   isAuthenticated: !!localStorage.getItem('token'),
-  user: {}
+  user: {
+    photoURL: ''
+  }
 };
 
 export function reducer(state = initialState, action: All): State {

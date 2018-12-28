@@ -1,5 +1,5 @@
 import { Player } from './../../models/player.model';
-import { LoadPlayer, LoadPlayerSuccess } from 'src/app/store/actions/player.actions';
+import { LoadPlayer, LoadPlayerSuccess, DeletePlayer, DeletePlayerSuccess } from 'src/app/store/actions/player.actions';
 import { Injectable } from '@angular/core';
 import { Actions, Effect, ofType } from '@ngrx/effects';
 import { switchMap, map, catchError, mergeMap } from 'rxjs/operators';
@@ -7,7 +7,10 @@ import { Observable, of } from 'rxjs';
 
 import { PlayerService } from './../../services/player/player.service';
 import { AddPlayer, PlayerActionTypes, AddPlayerSuccess, LoadPlayersSuccess } from '../actions/player.actions';
-import { HandleError } from '../actions/shared.action';
+import { HandleError, StartLoading, StopLoading } from '../actions/shared.action';
+import { Store } from '@ngrx/store';
+import { AppState } from '../app.states';
+import { DeleteNewsSuccess } from '../actions/news.actions';
 
 
 
@@ -17,6 +20,7 @@ export class PlayerEffects {
   constructor(
     private actions: Actions,
     private playerService: PlayerService,
+    private store: Store<AppState>
   ) { }
 
   @Effect()
@@ -50,6 +54,23 @@ export class PlayerEffects {
         return this.playerService.addPlayer(action.payload)
           .then((res: any) => {
             return new AddPlayerSuccess(action.payload);
+          })
+          .catch(error => {
+            return new HandleError({ error: error });
+          });
+      })
+    );
+
+  @Effect()
+  DeletePlayer: Observable<any> = this.actions
+    .pipe(
+      ofType(PlayerActionTypes.DELETE_PLAYER),
+      switchMap((action: DeletePlayer) => {
+        this.store.dispatch(new StartLoading());
+        return this.playerService.deletePlayer(action.payload)
+          .then(_ => {
+            this.store.dispatch(new StopLoading());
+            return new DeletePlayerSuccess(action.payload);
           })
           .catch(error => {
             return new HandleError({ error: error });

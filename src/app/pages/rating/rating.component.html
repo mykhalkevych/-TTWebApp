@@ -1,3 +1,17 @@
-<p>
-  rating works!
-</p>
+<div class="container">
+  <div class="row">
+    <mat-card class="w-100">
+      <mat-list>
+        <mat-list-item *ngFor="let player of players">
+          <img matListAvatar [src]="player.avatar || './assets/images/avatar.jpg'" alt="...">
+          <h3 matLine>{{player.name}} </h3>
+          <p matLine>
+            <span> {{player.email}} </span>
+          </p>
+          <span class="player-level">{{player.level}}</span>
+          <mat-divider></mat-divider>
+        </mat-list-item>
+      </mat-list>
+    </mat-card>
+  </div>
+</div>

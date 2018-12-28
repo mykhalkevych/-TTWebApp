@@ -9,7 +9,7 @@
             <p> {{itemNews.text}} </p>
           </mat-card-content>
           <mat-card-actions>
-            <button mat-icon-button [disabled]="!isUserLoggedIn" color="primary" (click)="likeNews(itemNews)" >
+            <button mat-icon-button [disabled]="!isUserLoggedIn" color="primary" (click)="likeNews(itemNews)">
               <mat-icon [matBadge]="itemNews.likes?.length || null" matBadgePosition="after" matBadgeColor="basic">thumb_up</mat-icon>
             </button>
             <button mat-icon-button color="warn" [disabled]="!isUserLoggedIn" (click)="dislikeNews(itemNews)">
@@ -42,7 +42,6 @@
           </mat-list-item>
         </mat-list>
       </mat-card>
-
     </div>
   </div>
 </div>

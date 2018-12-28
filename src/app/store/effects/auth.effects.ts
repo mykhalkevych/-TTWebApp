@@ -69,6 +69,7 @@ export class AuthEffects {
           .then(res => {
             res.user.sendEmailVerification();
             res.user.updateProfile({ displayName: payload.name, photoURL: null });
+            res.user['name'] = payload.name;
             return new SignUpSuccess(res);
           })
           .catch(error => {
@@ -86,7 +87,7 @@ export class AuthEffects {
         const user = data.payload.user;
         const player: Player = {
           id: user.uid,
-          name: user.displayName,
+          name: user.name,
           email: user.email,
           level: 1
         };

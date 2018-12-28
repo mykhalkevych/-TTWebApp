@@ -2,7 +2,7 @@ import { Component, OnInit } from '@angular/core';
 import { AppState, selectPlayers } from 'src/app/store/app.states';
 import { Store } from '@ngrx/store';
 import { Player } from 'src/app/models/player.model';
-import { LoadPlayers } from 'src/app/store/actions/player.actions';
+import { LoadPlayers, DeletePlayer } from 'src/app/store/actions/player.actions';
 
 @Component({
   selector: 'app-admin-players',
@@ -27,7 +27,6 @@ export class AdminPlayersComponent implements OnInit {
   }
 
   deletePlayer(player) {
-
+    this.store.dispatch(new DeletePlayer(player));
   }
-
 }
