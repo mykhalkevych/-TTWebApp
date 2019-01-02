@@ -24,6 +24,7 @@ import { StoreDevtoolsModule } from '@ngrx/store-devtools';
 import { SharedEffects } from './store/effects/shared.effects';
 import { PlayerDetailComponent } from './pages/player-detail/player-detail.component';
 import { ProfileComponent } from './pages/profile/profile.component';
+import { GameEffects } from './store/effects/game.effects';
 
 
 @NgModule({
@@ -45,7 +46,7 @@ import { ProfileComponent } from './pages/profile/profile.component';
     SharedModule,
     AppRoutingModule,
     StoreModule.forRoot(reducers),
-    EffectsModule.forRoot([AuthEffects, SharedEffects, PlayerEffects, NewsEffects]),
+    EffectsModule.forRoot([AuthEffects, SharedEffects, PlayerEffects, NewsEffects, GameEffects]),
     StoreDevtoolsModule.instrument(),
   ],
   bootstrap: [AppComponent]

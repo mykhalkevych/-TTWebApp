@@ -1,5 +1,5 @@
 import { Player } from './../../models/player.model';
-import { LoadPlayer, LoadPlayerSuccess, DeletePlayer, DeletePlayerSuccess } from 'src/app/store/actions/player.actions';
+import { LoadPlayer, LoadPlayerSuccess, DeletePlayer, DeletePlayerSuccess, UpdatePlayer } from 'src/app/store/actions/player.actions';
 import { Injectable } from '@angular/core';
 import { Actions, Effect, ofType } from '@ngrx/effects';
 import { switchMap, map, catchError, mergeMap } from 'rxjs/operators';
@@ -61,6 +61,21 @@ export class PlayerEffects {
       })
     );
 
+  @Effect({ dispatch: false })
+  UpdatePlayers: Observable<any> = this.actions
+    .pipe(
+      ofType(PlayerActionTypes.UPDATE_PLAYER),
+      switchMap((action: UpdatePlayer) => {
+        return this.playerService.updatePlayer(action.payload)
+          .then(_ => {
+            // this.store.dispatch(new StopLoading());
+            // return new UpdateNewsSuccess(action.payload);
+          })
+          .catch(error => {
+            return new HandleError({ error: error });
+          });
+      })
+    );
   @Effect()
   DeletePlayer: Observable<any> = this.actions
     .pipe(

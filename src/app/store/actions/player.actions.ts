@@ -9,6 +9,8 @@ export enum PlayerActionTypes {
   LOAD_PLAYER_SUCCESS = '[Player] Load Player Success',
   ADD_PLAYER = '[Player] Add player',
   ADD_PLAYER_SUCCESS = '[Player] Add player success',
+  UPDATE_PLAYER = '[Player] Update player',
+  UPDATE_PLAYER_SUCCESS = '[Player] Update player success',
   DELETE_PLAYER = '[Player] Delete player',
   DELETE_PLAYER_SUCCESS = '[Player] Delete player success',
 }
@@ -41,6 +43,16 @@ export class AddPlayerSuccess implements Action {
   constructor(public payload: Player) { }
 }
 
+export class UpdatePlayer implements Action {
+  readonly type = PlayerActionTypes.UPDATE_PLAYER;
+  constructor(public payload: Player) { }
+}
+
+export class UpdatePlayerSuccess implements Action {
+  readonly type = PlayerActionTypes.UPDATE_PLAYER_SUCCESS;
+  constructor(public payload: Player) { }
+}
+
 export class DeletePlayer implements Action {
   readonly type = PlayerActionTypes.DELETE_PLAYER;
   constructor(public payload: Player) { }
@@ -58,6 +70,8 @@ export type PlayerActions =
   | LoadPlayer
   | LoadPlayerSuccess
   | AddPlayer
+  | AddPlayerSuccess
+  | UpdatePlayer
+  | UpdatePlayerSuccess
   | DeletePlayer
-  | DeletePlayerSuccess
-  | AddPlayerSuccess;
+  | DeletePlayerSuccess;

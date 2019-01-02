@@ -32,6 +32,12 @@ export function reducer(state = initialState, action: PlayerActions): State {
         players: [...state.players, action.payload]
       };
     }
+    case PlayerActionTypes.UPDATE_PLAYER_SUCCESS: {
+      return {
+        ...state,
+        players: state.players.map(player => player.id === action.payload.id ? action.payload : player)
+      };
+    }
     case PlayerActionTypes.DELETE_PLAYER_SUCCESS: {
       return {
         ...state,

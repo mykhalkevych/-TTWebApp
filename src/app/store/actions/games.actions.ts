@@ -5,8 +5,10 @@ import { Game } from '../../models/game.model';
 export enum GamesActionTypes {
   LOAD_GAMES = '[Games] Load Games',
   LOAD_GAMES_SUCCESS = '[Games] Load Games Success',
-  CREATE_GAME = '[News] Add News',
-  CREATE_GAME_SUCCESS = '[News] Add News success'
+  CREATE_GAME = '[Games] Create Game',
+  CREATE_GAME_SUCCESS = '[Games] Create Game success',
+  DELETE_GAME = '[Games] Delete Game',
+  DELETE_GAME_SUCCESS = '[Games] Delete Game success',
 }
 
 export class LoadGames implements Action {
@@ -28,9 +30,21 @@ export class CreateGameSuccess implements Action {
   constructor(public payload: Game) { }
 }
 
+export class DeleteGame implements Action {
+  readonly type = GamesActionTypes.DELETE_GAME;
+  constructor(public payload: Game) { }
+}
+
+export class DeleteGameSuccess implements Action {
+  readonly type = GamesActionTypes.DELETE_GAME_SUCCESS;
+  constructor(public payload: Game) { }
+}
 
 export type GamesActions =
   | LoadGames
   | LoadGamesSuccess
   | CreateGame
-  | CreateGameSuccess;
+  | CreateGameSuccess
+  | DeleteGame
+  | DeleteGameSuccess;
+

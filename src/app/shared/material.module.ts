@@ -21,7 +21,9 @@ import {
   MatSelectModule,
   MatRadioModule,
   MatSlideToggleModule,
-  MatAutocompleteModule
+  MatAutocompleteModule,
+  MatDatepickerModule,
+  MatNativeDateModule
 } from '@angular/material';
 
 const MATERIAL_COMPONENTS = [
@@ -44,7 +46,9 @@ const MATERIAL_COMPONENTS = [
   MatSelectModule,
   MatRadioModule,
   MatSlideToggleModule,
-  MatAutocompleteModule
+  MatAutocompleteModule,
+  MatDatepickerModule,
+  MatNativeDateModule
 ];
 
 @NgModule({

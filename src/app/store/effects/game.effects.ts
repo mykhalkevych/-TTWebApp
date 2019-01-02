@@ -8,7 +8,7 @@ import { Store } from '@ngrx/store';
 import { HandleError, StartLoading, StopLoading } from '../actions/shared.action';
 import { AppState } from '../app.states';
 import { GamesService } from 'src/app/services/games/games.service';
-import { GamesActionTypes, LoadGamesSuccess, CreateGame, CreateGameSuccess } from '../actions/games.actions';
+import { GamesActionTypes, LoadGamesSuccess, CreateGame, CreateGameSuccess, DeleteGame, DeleteGameSuccess } from '../actions/games.actions';
 import { Game } from 'src/app/models/game.model';
 
 
@@ -34,7 +34,7 @@ export class GameEffects {
           );
       }));
 
-  @Effect({ dispatch: false })
+  @Effect({dispatch: false})
   CreateGame: Observable<any> = this.actions
     .pipe(
       ofType(GamesActionTypes.CREATE_GAME),
@@ -49,20 +49,20 @@ export class GameEffects {
       })
     );
 
-  // @Effect()
-  // DeletePlayer: Observable<any> = this.actions
-  //   .pipe(
-  //     ofType(GamesActionTypes.DELETE_PLAYER),
-  //     switchMap((action: DeletePlayer) => {
-  //       this.store.dispatch(new StartLoading());
-  //       return this.gameService.deletePlayer(action.payload)
-  //         .then(_ => {
-  //           this.store.dispatch(new StopLoading());
-  //           return new DeletePlayerSuccess(action.payload);
-  //         })
-  //         .catch(error => {
-  //           return new HandleError({ error: error });
-  //         });
-  //     })
-  //   );
+  @Effect()
+  DeleteGame: Observable<any> = this.actions
+    .pipe(
+      ofType(GamesActionTypes.DELETE_GAME),
+      switchMap((action: DeleteGame) => {
+        this.store.dispatch(new StartLoading());
+        return this.gameService.deleteGame(action.payload)
+          .then(_ => {
+            this.store.dispatch(new StopLoading());
+            return new DeleteGameSuccess(action.payload);
+          })
+          .catch(error => {
+            return new HandleError({ error: error });
+          });
+      })
+    );
 }

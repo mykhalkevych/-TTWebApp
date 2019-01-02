@@ -3,17 +3,42 @@
     <div class="col-12">
       <h2 class="mat-h2">Games</h2>
       <mat-accordion>
-        <mat-expansion-panel>
+        <mat-expansion-panel class="game-panel" *ngFor="let game of games">
           <mat-expansion-panel-header>
-            This is the expansion 1 title
+            <div class="game-title full-width">
+              <h6>{{game.tournament}}</h6>
+              <span>{{game.date | date}}</span>
+            </div>
+            <div class="game-info">
+              <div class="game-info-item">
+                {{game.firstPlayer.name}}
+                <span class="user-avatar">
+                  <img src="{{game.firstPlayer?.avatar || './assets/images/avatar.jpg'}}" alt="photo">
+                </span>
+                <div class="game-win">4</div>
+              </div>
+              -
+              <div class="game-info-item">
+                <div class="game-win">1</div>
+                <span class="user-avatar">
+                  <img src="{{game.secondPlayer?.avatar || './assets/images/avatar.jpg'}}" alt="photo">
+                </span>
+                {{game.secondPlayer.name}}
+              </div>
+            </div>
           </mat-expansion-panel-header>
-          This the expansion 1 content
-        </mat-expansion-panel>
-        <mat-expansion-panel>
-          <mat-expansion-panel-header>
-            This is the expansion 2 title
-          </mat-expansion-panel-header>
-          This the expansion 2 content
+          <div class="sets">
+            <table class="full-width">
+              <tr>
+                <td>{{game.firstPlayer.name}}</td>
+                <td *ngFor="let set of game.result">{{set.firstPlayerPoints}}</td>
+              </tr>
+              <tr>
+                <td>{{game.secondPlayer.name}}</td>
+                <td *ngFor="let set of game.result">{{set.secondPlayerPoints}}</td>
+              </tr>
+            </table>
+          </div>
         </mat-expansion-panel>
       </mat-accordion>
     </div>

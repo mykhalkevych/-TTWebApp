@@ -1,8 +1,8 @@
 import { Player } from './player.model';
 
 export interface GameSet {
-  firstPlayerPoint: number;
-  secondPlayerPoint: number;
+  firstPlayerPoints: number;
+  secondPlayerPoints: number;
 }
 
 export interface Game {
