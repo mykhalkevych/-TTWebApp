@@ -3,8 +3,8 @@ import { FormGroup, FormBuilder, Validators } from '@angular/forms';
 import { Store } from '@ngrx/store';
 import { AppState, selectPlayers, selectGames } from 'src/app/store/app.states';
 import { Player } from 'src/app/models/player.model';
-import { CreateGame, DeleteGame, LoadGames } from 'src/app/store/actions/games.actions';
-import { Game } from 'src/app/models/game.model';
+import { CreateGame, DeleteGame, LoadGames, UpdateGame } from 'src/app/store/actions/games.actions';
+import { Game, GameSet } from 'src/app/models/game.model';
 
 @Component({
   selector: 'app-admin-games',
@@ -18,7 +18,8 @@ export class AdminGamesComponent implements OnInit {
   players: Array<Player> = [];
   alreadySelected: Player;
   games: Array<Game> = [];
-
+  isEditing = false;
+  sets: Array<GameSet> = [];
   constructor(
     private fb: FormBuilder,
     private store: Store<AppState>
@@ -32,6 +33,12 @@ export class AdminGamesComponent implements OnInit {
       .subscribe(res => {
         this.games = res;
       });
+    for (let i = 0; i < 5; i++) {
+      this.sets.push({
+        firstPlayerPoints: 0,
+        secondPlayerPoints: 0
+      });
+    }
   }
 
   ngOnInit() {
@@ -42,18 +49,25 @@ export class AdminGamesComponent implements OnInit {
       gameType: ['big', Validators.required],
       status: ['new', Validators.required],
       firstPlayer: [null, Validators.required],
-      secondPlayer: [null, Validators.required]
+      secondPlayer: [null, Validators.required],
+      firstPlayerScore: [0, Validators.required],
+      secondPlayerScore: [0, Validators.required],
+      sets: [this.sets, Validators.required]
     });
   }
 
-  createGame() {
+  saveGame() {
     if (this.gameForm.valid) {
       const gameData = { ...this.gameForm.value };
       delete gameData.firstPlayer.disabled;
       delete gameData.secondPlayer.disabled;
-      gameData.id = Date.now().toString();
-      gameData.date = gameData.date.toISOString();
-      this.store.dispatch(new CreateGame(gameData));
+      if (this.isEditing) {
+        this.store.dispatch(new UpdateGame(gameData));
+      } else {
+        gameData.id = Date.now().toString();
+        gameData.date = gameData.date.toISOString();
+        this.store.dispatch(new CreateGame(gameData));
+      }
     }
 
   }
@@ -70,8 +84,28 @@ export class AdminGamesComponent implements OnInit {
     });
   }
 
+  private setGameFormData(gameData) {
+    this.gameForm.controls['date'].setValue(gameData.date);
+    this.gameForm.controls['double'].setValue(gameData.double);
+    this.gameForm.controls['tournament'].setValue(gameData.tournament);
+    this.gameForm.controls['gameType'].setValue(gameData.gameType);
+    this.gameForm.controls['firstPlayer'].setValue(this.players.find(el => el.id === gameData.firstPlayer.id));
+    this.gameForm.controls['secondPlayer'].setValue(this.players.find(el => el.id === gameData.secondPlayer.id));
+  }
+
+
+  editGame(game) {
+    this.isEditing = true;
+    this.setGameFormData(game);
+    console.log(game);
+  }
+
   deleteGame(game) {
     this.store.dispatch(new DeleteGame(game));
+  }
+
+  resetForm() {
+    this.isEditing = false;
   }
 
 }

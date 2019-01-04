@@ -1,7 +1,7 @@
 <div class="col-sm-12">
   <div class="row">
     <div class="col-md-6">
-      <form class="news-form" [formGroup]="gameForm" novalidate (submit)="createGame()">
+      <form class="news-form" [formGroup]="gameForm" novalidate (submit)="saveGame()">
         <mat-form-field class="full-width">
           <input type="text" placeholder="Tournament" aria-label="Assignee" matInput formControlName="tournament"
             [matAutocomplete]="auto">
@@ -39,18 +39,69 @@
         <p>
           <mat-slide-toggle formControlName="double">Double</mat-slide-toggle>
         </p>
+        <div *ngIf="isEditing">
+          <div>Status</div>
+          <mat-radio-group formControlName="status">
+            <mat-radio-button value="new">
+              New
+            </mat-radio-button>
+            <mat-radio-button value="active">
+              Active
+            </mat-radio-button>
+            <mat-radio-button value="finished">
+              Finished
+            </mat-radio-button>
+          </mat-radio-group>
+          <div>Score</div>
+          <div class="row">
+            <mat-form-field class="col">
+              <input type="number" placeholder="First Player Score" matInput formControlName="firstPlayerScore">
+            </mat-form-field>
+            <mat-form-field class="col">
+              <input type="number" placeholder="Second Player Score" matInput formControlName="secondPlayerScore">
+            </mat-form-field>
+          </div>
+          <div>Sets</div>
+          <div class="row">
+            <mat-form-field class="col col-20" *ngFor="let set of sets; let i = index">
+              <input type="number" [placeholder]="'Set '+(i+1)" matInput [(ngModel)]="set.firstPlayerPoints"
+                [ngModelOptions]="{standalone: true}">
+            </mat-form-field>
+            <mat-form-field class="col col-20" *ngFor="let set of sets; let i = index">
+              <input type="number" [placeholder]="'Set '+(i+1)" matInput [(ngModel)]="set.secondPlayerPoints"
+                [ngModelOptions]="{standalone: true}">
+            </mat-form-field>
+          </div>
+        </div>
         <div>
-          <button type="submit" mat-raised-button color="accent">Create Game</button>
+          <button type="submit" mat-raised-button color="accent">{{isEditing? 'Save Game' : 'Create Game'}}</button>
+          <button type="reset" mat-raised-button (click)="resetForm()">Reset</button>
         </div>
       </form>
     </div>
     <div class="col-md-6">
       <ul class="list-group list-group-flush">
-        <li class="list-group-item" *ngFor="let game of games">{{game.tournament}}
+        <li class="list-group-item" *ngFor="let game of games">
+          <span class="name"> {{game.tournament}} </span>
+          <span class="date">({{game.date | date}})</span>
+          <div class="players">
+            <span>
+              {{game.firstPlayer.name}}
+              <span class="user-avatar">
+                <img src="{{game.firstPlayer?.avatar || './assets/images/avatar.jpg'}}" alt="photo">
+              </span>
+            </span>
+            <span>
+              <span class="user-avatar">
+                <img src="{{game.secondPlayer?.avatar || './assets/images/avatar.jpg'}}" alt="photo">
+              </span>
+              {{game.secondPlayer.name}}
+            </span>
+          </div>
           <div class="actions">
-            <!-- <button mat-icon-button color="accent" (click)="editNews(game)">
+            <button mat-icon-button color="accent" (click)="editGame(game)">
               <mat-icon>edit</mat-icon>
-            </button> -->
+            </button>
             <button mat-icon-button color="warn" (click)="deleteGame(game)">
               <mat-icon>close</mat-icon>
             </button>

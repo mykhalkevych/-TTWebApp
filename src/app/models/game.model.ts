@@ -14,5 +14,7 @@ export interface Game {
   status?: string;
   firstPlayer: Player;
   secondPlayer: Player;
-  result: Array<GameSet>;
+  firstPlayerScore: number;
+  secondPlayerScore: number;
+  sets: Array<GameSet>;
 }

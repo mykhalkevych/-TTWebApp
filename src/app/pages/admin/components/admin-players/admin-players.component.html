@@ -1,6 +1,9 @@
 <div class="col-md-12">
   <ul class="list-group list-group-flush">
     <li class="list-group-item" *ngFor="let player of players">
+      <span class="user-avatar">
+        <img src="{{player.avatar || './assets/images/avatar.jpg'}}" alt="photo">
+      </span>
       <b>{{player.name}} </b>
       ({{player.email}})
       <div class="actions">

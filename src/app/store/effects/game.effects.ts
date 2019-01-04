@@ -8,7 +8,10 @@ import { Store } from '@ngrx/store';
 import { HandleError, StartLoading, StopLoading } from '../actions/shared.action';
 import { AppState } from '../app.states';
 import { GamesService } from 'src/app/services/games/games.service';
-import { GamesActionTypes, LoadGamesSuccess, CreateGame, CreateGameSuccess, DeleteGame, DeleteGameSuccess } from '../actions/games.actions';
+import {
+  GamesActionTypes, LoadGamesSuccess, CreateGame,
+  CreateGameSuccess, DeleteGame, DeleteGameSuccess, UpdateGame
+} from '../actions/games.actions';
 import { Game } from 'src/app/models/game.model';
 
 
@@ -34,7 +37,7 @@ export class GameEffects {
           );
       }));
 
-  @Effect({dispatch: false})
+  @Effect({ dispatch: false })
   CreateGame: Observable<any> = this.actions
     .pipe(
       ofType(GamesActionTypes.CREATE_GAME),
@@ -42,6 +45,22 @@ export class GameEffects {
         return this.gameService.createGame(action.payload)
           .then((res: any) => {
             return new CreateGameSuccess(action.payload);
+          })
+          .catch(error => {
+            return new HandleError({ error: error });
+          });
+      })
+    );
+
+  @Effect({ dispatch: false })
+  UpdateGame: Observable<any> = this.actions
+    .pipe(
+      ofType(GamesActionTypes.UPDATE_GAME),
+      switchMap((action: UpdateGame) => {
+        return this.gameService.updateGame(action.payload)
+          .then(_ => {
+            // this.store.dispatch(new StopLoading());
+            // return new UpdateNewsSuccess(action.payload);
           })
           .catch(error => {
             return new HandleError({ error: error });
