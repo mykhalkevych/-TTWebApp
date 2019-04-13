@@ -1,6 +1,6 @@
 <div class="container">
   <div class="row">
-    <div class="col-9">
+    <div class="col-lg-9 col-md-8 col-sm-12">
       <div class="news">
         <h2 class="mat-h2">News</h2>
         <mat-card *ngFor="let itemNews of news">
@@ -10,16 +10,18 @@
           </mat-card-content>
           <mat-card-actions>
             <button mat-icon-button [disabled]="!isUserLoggedIn" color="primary" (click)="likeNews(itemNews)">
-              <mat-icon [matBadge]="itemNews.likes?.length || null" matBadgePosition="after" matBadgeColor="basic">thumb_up</mat-icon>
+              <mat-icon [matBadge]="itemNews.likes?.length || null" matBadgePosition="after" matBadgeColor="basic">
+                thumb_up</mat-icon>
             </button>
             <button mat-icon-button color="warn" [disabled]="!isUserLoggedIn" (click)="dislikeNews(itemNews)">
-              <mat-icon [matBadge]="itemNews.dislikes?.length || null" matBadgePosition="after" matBadgeColor="accent">thumb_down</mat-icon>
+              <mat-icon [matBadge]="itemNews.dislikes?.length || null" matBadgePosition="after" matBadgeColor="accent">
+                thumb_down</mat-icon>
             </button>
           </mat-card-actions>
         </mat-card>
       </div>
     </div>
-    <div class="col-3">
+    <div class="col-lg-3 col-md-4 col-sm-12">
       <h3 class="mat-h2">Players</h3>
       <mat-card>
         <mat-list>
@@ -31,16 +33,31 @@
           </mat-list-item>
         </mat-list>
       </mat-card>
-      <h3 class="mat-h2">Last Games</h3>
+      <h3 class="mat-h2 mt-3">Last Games</h3>
       <mat-card>
-        <mat-list>
-          <mat-list-item *ngFor="let player of players; let i = index" [routerLink]="['player', player.id]">
-            <span class="number">{{i+1+'. '}}</span>
-            <img matListAvatar src="{{player.avatar || './assets/images/avatar.jpg'}}" alt="{{player.name}}">
-            <h3 matLine> {{player.name}} </h3>
-            <span class="level">{{player.level}}</span>
-          </mat-list-item>
-        </mat-list>
+        <div class="game-item" *ngFor="let game of games let i=index" [routerLink]="['games']">
+          <div class="game-info">
+            <div class="game-info-item">
+              <span class="user-name">
+                {{game.firstPlayer.name}}
+              </span>
+              <span class="user-avatar">
+                <img src="{{game.firstPlayer?.avatar || './assets/images/avatar.jpg'}}" alt="photo">
+              </span>
+              <div class="game-win">{{game.firstPlayerScore}}</div>
+            </div>
+            -
+            <div class="game-info-item">
+              <div class="game-win">{{game.secondPlayerScore}}</div>
+              <span class="user-avatar">
+                <img src="{{game.secondPlayer?.avatar || './assets/images/avatar.jpg'}}" alt="photo">
+              </span>
+              <span class="user-name">
+                {{game.secondPlayer.name}}
+              </span>
+            </div>
+          </div>
+        </div>
       </mat-card>
     </div>
   </div>

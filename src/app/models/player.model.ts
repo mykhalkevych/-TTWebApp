@@ -4,4 +4,5 @@ export interface Player {
   email?: string;
   level?: number;
   avatar?: string;
+  awards?: Array<number>;
 }

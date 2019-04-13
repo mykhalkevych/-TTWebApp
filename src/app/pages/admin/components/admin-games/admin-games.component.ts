@@ -43,6 +43,7 @@ export class AdminGamesComponent implements OnInit {
 
   ngOnInit() {
     this.gameForm = this.fb.group({
+      id: [Date.now().toString(), Validators.required],
       date: [new Date(), [Validators.required]],
       double: [false],
       tournament: ['', Validators.required],
@@ -58,13 +59,12 @@ export class AdminGamesComponent implements OnInit {
 
   saveGame() {
     if (this.gameForm.valid) {
-      const gameData = { ...this.gameForm.value };
+      const gameData = { ...this.gameForm.value, sets: [...this.sets] };
       delete gameData.firstPlayer.disabled;
       delete gameData.secondPlayer.disabled;
       if (this.isEditing) {
         this.store.dispatch(new UpdateGame(gameData));
       } else {
-        gameData.id = Date.now().toString();
         gameData.date = gameData.date.toISOString();
         this.store.dispatch(new CreateGame(gameData));
       }
@@ -85,12 +85,18 @@ export class AdminGamesComponent implements OnInit {
   }
 
   private setGameFormData(gameData) {
+    this.gameForm.controls['id'].setValue(gameData.id);
     this.gameForm.controls['date'].setValue(gameData.date);
     this.gameForm.controls['double'].setValue(gameData.double);
     this.gameForm.controls['tournament'].setValue(gameData.tournament);
     this.gameForm.controls['gameType'].setValue(gameData.gameType);
+    this.gameForm.controls['firstPlayerScore'].setValue(gameData.firstPlayerScore);
+    this.gameForm.controls['secondPlayerScore'].setValue(gameData.secondPlayerScore);
     this.gameForm.controls['firstPlayer'].setValue(this.players.find(el => el.id === gameData.firstPlayer.id));
     this.gameForm.controls['secondPlayer'].setValue(this.players.find(el => el.id === gameData.secondPlayer.id));
+    if (gameData.sets) {
+      this.sets = gameData.sets;
+    }
   }
 
 

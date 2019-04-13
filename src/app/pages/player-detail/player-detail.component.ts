@@ -1,3 +1,4 @@
+import { awards } from './../../shared/awards';
 import { Subscription } from 'rxjs';
 import { Component, OnInit, OnDestroy } from '@angular/core';
 import { ActivatedRoute } from '@angular/router';
@@ -17,6 +18,7 @@ export class PlayerDetailComponent implements OnInit, OnDestroy {
   playerId: string;
   player: any;
   playerSubscription: Subscription;
+  awards = awards;
   constructor(
     private route: ActivatedRoute,
     private store: Store<AppState>

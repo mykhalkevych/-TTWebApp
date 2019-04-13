@@ -57,6 +57,7 @@ export class GameEffects {
     .pipe(
       ofType(GamesActionTypes.UPDATE_GAME),
       switchMap((action: UpdateGame) => {
+        console.log(action.payload);
         return this.gameService.updateGame(action.payload)
           .then(_ => {
             // this.store.dispatch(new StopLoading());

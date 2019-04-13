@@ -2,12 +2,17 @@
   <div class="row">
     <mat-card class="w-100">
       <mat-list>
-        <mat-list-item *ngFor="let player of players">
+        <mat-list-item *ngFor="let player of players" [routerLink]="['/player', player.id]">
           <img matListAvatar [src]="player.avatar || './assets/images/avatar.jpg'" alt="...">
           <h3 matLine>{{player.name}} </h3>
           <p matLine>
             <span> {{player.email}} </span>
           </p>
+          <div class="awards mr-4">
+            <div *ngFor="let ind of player.awards" class="award">
+              <img [src]="awards[ind].icon" alt="award" [title]="awards[ind].title">
+            </div>
+          </div>
           <span class="player-level">{{player.level}}</span>
           <mat-divider></mat-divider>
         </mat-list-item>

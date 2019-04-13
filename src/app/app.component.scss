@@ -1,156 +1,211 @@
 .main {
-  width: 100%;
-  height: calc(100% - 64px);
+    width: 100%;
+    height: calc(100% - 64px);
 }
 
 .col.col-20 {
-  width: 20%;
+    width: 20%;
 }
 
 .sidenav {
-  //   height: 100%;
-  min-width: 200px;
+    //   height: 100%;
+    min-width: 200px;
 }
 
 .sidenav-content {
-  height: 100%;
-  padding-top: 40px;
+    height: 100%;
+    padding-top: 40px;
 }
 
 .spinner {
-  position: fixed;
-  width: 100%;
-  height: 100%;
-  left: 0;
-  top: 0;
-  background: rgba(0, 0, 0, .3);
-  z-index: 2;
-  display: flex;
-  align-items: center;
-  justify-content: center;
+    position: fixed;
+    width: 100%;
+    height: 100%;
+    left: 0;
+    top: 0;
+    background: rgba(0, 0, 0, .3);
+    z-index: 2;
+    display: flex;
+    align-items: center;
+    justify-content: center;
 }
 
 .mat-tab-body-content {
-  padding: 30px 0;
+    padding: 30px 0;
 }
 
 .mat-tab-body-wrapper {
-  background: #fff;
+    background: #fff;
 }
 
 .mat-radio-button {
-  &+.mat-radio-button {
-    margin-left: 15px;
-  }
+    &+.mat-radio-button {
+        margin-left: 15px;
+    }
 }
 
 .list-group-item {
-  position: relative;
-  .actions {
-    position: absolute;
-    right: 0;
-    top: 4px;
-  }
+    position: relative;
+
+    .actions {
+        position: absolute;
+        right: 0;
+        top: 4px;
+    }
 }
 
 .user-avatar {
-  img {
-    width: 50px;
-    height: 50px;
-    border-radius: 50%;
-    -webkit-border-radius: 50%;
-    -moz-border-radius: 50%;
-    -ms-border-radius: 50%;
-    -o-border-radius: 50%;
-  }
+    img {
+        width: 50px;
+        height: 50px;
+        border-radius: 50%;
+        -webkit-border-radius: 50%;
+        -moz-border-radius: 50%;
+        -ms-border-radius: 50%;
+        -o-border-radius: 50%;
+    }
 }
 
 mat-card {
-  margin-top: 15px;
+    margin-top: 15px;
+}
+
+.mat-nav-list .mat-list-item.active {
+  background: #3f51b5;
+  color: #fff;
 }
 
 .player-level {
-  width: 26px;
-  height: 26px;
-  text-align: center;
-  line-height: 22px;
-  border-radius: 50%;
-  border: 2px solid;
+    width: 26px;
+    height: 26px;
+    text-align: center;
+    line-height: 22px;
+    border-radius: 50%;
+    border: 2px solid;
+    flex-shrink: 0;
 }
 
 .game-panel {
-  .mat-content {
-    justify-content: center;
-    align-items: center;
-    position: relative;
-  }
-  .game-title {
-    position: absolute;
-    left: 0;
-    display: flex;
-    flex-direction: column;
-    h6 {
-      margin: 0;
-      line-height: 1;
-      font-size: 14px;
+    .mat-content {
+        justify-content: center;
+        align-items: center;
+        position: relative;
     }
-    span {
-      font-size: 11px;
+
+    .game-title {
+        position: absolute;
+        left: 0;
+        display: flex;
+        flex-direction: column;
+
+        h6 {
+            margin: 0;
+            line-height: 1;
+            font-size: 14px;
+        }
+
+        span {
+            font-size: 11px;
+        }
     }
-  }
-  .game-info {
-    display: flex;
-    align-items: center;
-    justify-content: center;
-    width: 100%;
-    .game-info-item {
-      width: 50%;
-      display: flex;
-      align-items: center;
-      &:first-child {
-        justify-content: flex-end;
-      }
-    }
-    .user-avatar {
-      margin: 0 5px;
-      img {
-        width: 30px;
-        height: 30px;
-      }
-    }
-  }
-}
-app-admin {
-  .user-avatar {
-    margin: 0 5px;
-    img {
-      width: 30px;
-      height: 30px;
-    }
-  }
-  app-admin-games {
-    .list-group-item {
-      display: flex;
-      flex-wrap: wrap;
-      align-items: center;
-      .name {
-        font-size: 14px;
-      }
-      .date {
-        font-size: 11px;
-      }
-      .players {
+
+    .game-info {
         display: flex;
         align-items: center;
+        justify-content: center;
         width: 100%;
-        span{
-          width: 50%;
-          &:first-child {
-            text-align: right;
-          }
-        }
-      }
-    }
-  }
 
+        .game-info-item {
+            width: 50%;
+            display: flex;
+            align-items: center;
+
+            &:first-child {
+                justify-content: flex-end;
+            }
+        }
+
+        .user-avatar {
+            margin: 0 5px;
+
+            img {
+                width: 30px;
+                height: 30px;
+            }
+        }
+    }
+}
+
+.avatar-wrapper {
+    display: inline-block;
+    width: 150px;
+    height: 150px;
+
+    .avatar {
+        display: block;
+        width: 100%;
+        height: 100%;
+        border-radius: 50%;
+        overflow: hidden;
+    }
+
+    img {
+        width: 100%;
+        height: 100%;
+    }
+}
+
+app-admin {
+    .user-avatar {
+        margin: 0 5px;
+
+        img {
+            width: 30px;
+            height: 30px;
+        }
+    }
+
+    app-admin-games {
+        .list-group-item {
+            display: flex;
+            flex-wrap: wrap;
+            align-items: center;
+
+            .name {
+                font-size: 14px;
+            }
+
+            .date {
+                font-size: 11px;
+            }
+
+            .players {
+                display: flex;
+                align-items: center;
+                width: 100%;
+
+                span {
+                    width: 50%;
+
+                    &:first-child {
+                        text-align: right;
+                    }
+                }
+            }
+        }
+    }
+
+}
+
+.mat-expanded.mat-expanded {
+    .mat-expansion-panel-header.mat-expansion-panel-header {
+        background: #333;
+        color: #fff;
+        margin-bottom: 15px;
+    }
+
+    .mat-expansion-indicator::after,
+    .mat-expansion-panel-header-description {
+      color: #fff;
+    }
 }

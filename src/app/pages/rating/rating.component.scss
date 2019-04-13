@@ -1,0 +1,17 @@
+.awards {
+    display: flex;
+
+    .award {
+        img {
+            width: 35px;
+        }
+
+        &+.award {
+            margin-left: -12px;
+        }
+
+        &:hover {
+            z-index: 2;
+        }
+    }
+}

@@ -1,3 +1,4 @@
+import { awards } from './../../shared/awards';
 import { Component, OnInit } from '@angular/core';
 import { Player } from 'src/app/models/player.model';
 import { selectPlayers, AppState } from 'src/app/store/app.states';
@@ -12,7 +13,7 @@ import { Store } from '@ngrx/store';
 export class RatingComponent implements OnInit {
 
   players: Array<Player> = [];
-
+  awards = awards;
   constructor(
     private store: Store<AppState>
   ) { }

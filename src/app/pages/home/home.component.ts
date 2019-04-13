@@ -5,11 +5,13 @@ import { Store } from '@ngrx/store';
 import { Component, OnInit, OnDestroy } from '@angular/core';
 import { Subscription } from 'rxjs';
 
-import { AppState, selectPlayers, selectNews, getCurrentUser, getIsAuthenticated } from 'src/app/store/app.states';
+import { AppState, selectPlayers, selectNews, getCurrentUser, getIsAuthenticated, selectGames } from 'src/app/store/app.states';
 import { Player } from './../../models/player.model';
 import { LoadPlayers } from 'src/app/store/actions/player.actions';
 import { News } from 'src/app/models/news.model';
 import { LoadNews } from 'src/app/store/actions/news.actions';
+import { Game } from 'src/app/models/game.model';
+import { LoadGames } from 'src/app/store/actions/games.actions';
 
 @Component({
   selector: 'app-home',
@@ -23,6 +25,7 @@ export class HomeComponent implements OnInit, OnDestroy {
   currentUser: User;
   likeObj: Likes;
   isUserLoggedIn = false;
+  games: Array<Game> = [];
 
   playersSubscription: Subscription;
 
@@ -31,10 +34,17 @@ export class HomeComponent implements OnInit, OnDestroy {
   ngOnInit() {
     this.store.dispatch(new LoadPlayers());
     this.store.dispatch(new LoadNews());
+    this.store.dispatch(new LoadGames());
+
     this.playersSubscription = this.store.select(selectPlayers)
       .subscribe(res => {
         console.log(res);
         this.players = res;
+      });
+      this.store.select(selectGames)
+      .subscribe(res => {
+        console.log(res);
+        this.games = res;
       });
     this.store.select(selectNews)
       .subscribe(res => {

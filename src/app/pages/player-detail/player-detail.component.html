@@ -2,7 +2,40 @@
   <div class="row">
     <div class="col">
       <mat-card>
-        <h1 class="mat-h1">{{player.name}}</h1>
+        <div class="row">
+          <div class="col-2">
+            <div class="avatar-wrapper">
+              <span class="avatar">
+                <img src="{{player.avatar || './assets/images/avatar.jpg'}}" alt="...">
+              </span>
+            </div>
+          </div>
+          <div class="col-10">
+            <div>
+              Name: <span class="mat-h1">{{player.name}}</span>
+            </div>
+            <div>
+              Email: <span>{{player.email}}</span>
+            </div>
+            <div>
+              Level: <span class="player-level d-inline-block">{{player.level}}</span>
+            </div>
+          </div>
+        </div>
+      </mat-card>
+    </div>
+  </div>
+  <div class="row">
+    <div class="col">
+      <mat-card>
+        <div class="awards d-flex flex-wrap">
+          <div *ngFor="let award of awards; let i = index" class="award" [ngClass]="{active: player.awards?.includes(i)}">
+            <img [src]="award.icon" alt="award">
+            <div class="hint d-flex">
+              <div class="title">{{award.title}}</div>
+            </div>
+          </div>
+        </div>
       </mat-card>
     </div>
   </div>

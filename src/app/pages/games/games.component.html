@@ -15,11 +15,11 @@
                 <span class="user-avatar">
                   <img src="{{game.firstPlayer?.avatar || './assets/images/avatar.jpg'}}" alt="photo">
                 </span>
-                <div class="game-win">4</div>
+                <div class="game-win">{{game.firstPlayerScore}}</div>
               </div>
               -
               <div class="game-info-item">
-                <div class="game-win">1</div>
+                <div class="game-win">{{game.secondPlayerScore}}</div>
                 <span class="user-avatar">
                   <img src="{{game.secondPlayer?.avatar || './assets/images/avatar.jpg'}}" alt="photo">
                 </span>
@@ -28,14 +28,14 @@
             </div>
           </mat-expansion-panel-header>
           <div class="sets">
-            <table class="full-width">
+            <table class="full-width table table-bordered">
               <tr>
                 <td>{{game.firstPlayer.name}}</td>
-                <td *ngFor="let set of game.result">{{set.firstPlayerPoints}}</td>
+                <td *ngFor="let set of game.sets">{{set.firstPlayerPoints}}</td>
               </tr>
               <tr>
                 <td>{{game.secondPlayer.name}}</td>
-                <td *ngFor="let set of game.result">{{set.secondPlayerPoints}}</td>
+                <td *ngFor="let set of game.sets">{{set.secondPlayerPoints}}</td>
               </tr>
             </table>
           </div>
