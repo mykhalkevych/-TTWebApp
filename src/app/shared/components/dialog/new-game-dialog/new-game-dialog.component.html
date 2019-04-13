@@ -1,30 +1,30 @@
-<h2 class="mat-dialog-title">Create game reguest</h2>
+<h2 class="mat-dialog-title">Створіть запит для суперника</h2>
 
 <form class="popup-form" [formGroup]="newGameForm" novalidate (ngSubmit)="sendGameRequest()">
 
   <mat-form-field class="full-width">
-    <mat-select placeholder="Select oponents" formControlName="oponents" multiple>
+    <mat-select placeholder="Виберіть суперника" formControlName="oponents">
       <mat-option *ngFor="let player of players" [value]="player">{{player.name}}</mat-option>
     </mat-select>
     <mat-error *ngIf="newGameForm.controls['oponents'].hasError('required')">
-      Please choose <strong>opponents</strong>
+      Будь ласка, виберіть <strong>суперника</strong>
     </mat-error>
   </mat-form-field>
-  <p>
+  <!-- <p>
     <mat-slide-toggle formControlName="double">Double</mat-slide-toggle>
-  </p>
+  </p> -->
   <mat-radio-group formControlName="gameType">
     <mat-radio-button value="small">
-      Small (11 points)
+      Мала (11 очок)
     </mat-radio-button>
     <mat-radio-button value="big">
-      Big (21 points)
+      Велика (21 очко)
     </mat-radio-button>
   </mat-radio-group>
 
   <div mat-dialog-actions>
-    <button mat-raised-button (click)="closeDialog()">Cancel</button>
-    <button mat-raised-button color="primary" type="submit">Send game request</button>
+    <button mat-raised-button (click)="closeDialog()">Відмінити</button>
+    <button mat-raised-button color="primary" type="submit">Відправити запит</button>
   </div>
 
 </form>

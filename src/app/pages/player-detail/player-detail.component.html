@@ -12,13 +12,13 @@
           </div>
           <div class="col-10">
             <div>
-              Name: <span class="mat-h1">{{player.name}}</span>
+             <span class='info-label'> Ім'я:</span> <span class="mat-h1">{{player.name}}</span>
             </div>
             <div>
-              Email: <span>{{player.email}}</span>
+                <span class='info-label'>Емейл:</span> <span>{{player.email}}</span>
             </div>
             <div>
-              Level: <span class="player-level d-inline-block">{{player.level}}</span>
+                <span class='info-label'>Рівень:</span> <span class="player-level d-inline-block">{{player.level}}</span>
             </div>
           </div>
         </div>
@@ -27,9 +27,11 @@
   </div>
   <div class="row">
     <div class="col">
+      <h2 class="mat-h2 mt-2">Отримані нагороди</h2>
       <mat-card>
         <div class="awards d-flex flex-wrap">
-          <div *ngFor="let award of awards; let i = index" class="award" [ngClass]="{active: player.awards?.includes(i)}">
+          <div *ngFor="let award of awards; let i = index" class="award"
+            [ngClass]="{active: player.awards?.includes(i)}">
             <img [src]="award.icon" alt="award">
             <div class="hint d-flex">
               <div class="title">{{award.title}}</div>

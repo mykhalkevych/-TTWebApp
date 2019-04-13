@@ -5,9 +5,9 @@
         <mat-icon>menu</mat-icon>
       </button>
       <div>
-        <button mat-flat-button color="primary" (click)="login()">Login</button>
+        <button mat-flat-button color="primary" (click)="login()">Вхід</button>
         <button mat-flat-button color="primary" (click)="singUp()">
-          Sing Up
+          Зареєструватись
         </button>
       </div>
     </mat-toolbar-row>
@@ -17,16 +17,16 @@
         <mat-icon>menu</mat-icon>
       </button>
       <div>
-        <button mat-raised-button color="accent" (click)="openNewGameDialog()">New Game</button>
+        <button mat-raised-button color="accent" (click)="openNewGameDialog()">Тренування</button>
         <button class="user" mat-flat-button color="primary" [matMenuTriggerFor]="userMenu">
           <span class="user-avatar">
             <img src="{{user.photoURL || './assets/images/avatar.jpg'}}" alt="...">
           </span>
           <mat-icon>keyboard_arrow_down</mat-icon>
           <mat-menu #userMenu="matMenu">
-            <button mat-menu-item [routerLink]="['/profile']" routerLinkActive="router-link-active">Profile</button>
-            <button mat-menu-item>Settings</button>
-            <button mat-menu-item (click)="logout()">Logout</button>
+            <button mat-menu-item [routerLink]="['/profile']" routerLinkActive="router-link-active">Мій профіль</button>
+            <button mat-menu-item>Налаштування</button>
+            <button mat-menu-item (click)="logout()">Вийти</button>
           </mat-menu>
         </button>
       </div>

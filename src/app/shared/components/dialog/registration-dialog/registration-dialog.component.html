@@ -1,38 +1,38 @@
-<h2 class="mat-dialog-title">Registaration</h2>
+<h2 class="mat-dialog-title">Реєстрація</h2>
 
 <form class="popup-form" [formGroup]="registrationForm" novalidate (ngSubmit)="registration()">
 
   <mat-form-field class="full-width">
-    <input matInput placeholder="Name" type="text" formControlName="name">
+    <input matInput placeholder="Ім'я" type="text" formControlName="name">
     <mat-error *ngIf="registrationForm.controls['name'].hasError('required')">
-      Name is <strong>required</strong>
+      Ім'я <strong>обов'язкове</strong>
     </mat-error>
     <mat-error *ngIf="registrationForm.controls['name'].hasError('minlength')">
-      Minimum 2 characters
+        Мінімум 2 символи
     </mat-error>
   </mat-form-field>
   <mat-form-field class="full-width">
-    <input matInput placeholder="Email" type="email" name="email" formControlName="email">
+    <input matInput placeholder="Емейл адреса" type="email" name="email" formControlName="email">
     <mat-error *ngIf="registrationForm.controls['email'].hasError('required')">
-      Email is <strong>required</strong>
+      Емейл адреса <strong>обов'язкова</strong>
     </mat-error>
     <mat-error *ngIf="registrationForm.controls['email'].hasError('pattern')">
-      Please enter a valid email address
+      Будь ласка, введіть правильну емейл адресу
     </mat-error>
   </mat-form-field>
   <mat-form-field class="full-width">
-    <input matInput placeholder="Password" type="password" formControlName="password">
+    <input matInput placeholder="Пароль" type="password" formControlName="password">
     <mat-error *ngIf="registrationForm.controls['password'].hasError('required')">
-      Password is <strong>required</strong>
+      Пароль <strong>обов'язковий</strong>
     </mat-error>
     <mat-error *ngIf="registrationForm.controls['password'].hasError('minlength')">
-      Minimum 6 characters
+      Мінімум 6 символів
     </mat-error>
   </mat-form-field>
 
   <div mat-dialog-actions>
-    <button mat-raised-button type="reset" (click)="closeDialog($event)">Cancel</button>
-    <button mat-raised-button color="primary" type="submit">Register</button>
+    <button mat-raised-button type="reset" (click)="closeDialog($event)">Відмінити</button>
+    <button mat-raised-button color="primary" type="submit">Зареєструватись</button>
   </div>
 
 </form>

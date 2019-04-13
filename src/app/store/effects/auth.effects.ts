@@ -124,6 +124,7 @@ export class AuthEffects {
         return this.authService.logout()
           .then(res => {
             localStorage.removeItem('token');
+            this.router.navigateByUrl('');
             return new LogOutSuccess();
           })
           .catch(error => {

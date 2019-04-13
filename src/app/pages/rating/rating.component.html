@@ -9,8 +9,8 @@
             <span> {{player.email}} </span>
           </p>
           <div class="awards mr-4">
-            <div *ngFor="let ind of player.awards" class="award">
-              <img [src]="awards[ind].icon" alt="award" [title]="awards[ind].title">
+            <div *ngFor="let ind of player.awards" class="award" >
+              <img [src]="awards[ind].icon" alt="award"  [matTooltip]="awards[ind].title" matTooltipPosition="above">
             </div>
           </div>
           <span class="player-level">{{player.level}}</span>

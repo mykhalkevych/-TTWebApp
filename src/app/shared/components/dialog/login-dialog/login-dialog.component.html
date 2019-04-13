@@ -1,29 +1,29 @@
-<h2 class="mat-dialog-title">Login</h2>
+<h2 class="mat-dialog-title">Вхід</h2>
 
 <form class="popup-form" [formGroup]="loginForm" novalidate (ngSubmit)="login()">
 
   <mat-form-field class="full-width">
-    <input matInput placeholder="Email" type="email" name="email" formControlName="email">
+    <input matInput placeholder="Емейл адреса" type="email" name="email" formControlName="email">
     <mat-error *ngIf="loginForm.controls['email'].hasError('required')">
-      Email is <strong>required</strong>
+      Емейл адреса <strong>обов'язкова</strong>
     </mat-error>
     <mat-error *ngIf="loginForm.controls['email'].hasError('pattern')">
-      Please enter a valid email address
+      Будь ласка, введіть правильну емейл адресу
     </mat-error>
   </mat-form-field>
   <mat-form-field class="full-width">
-    <input matInput placeholder="Password" type="password" formControlName="password">
+    <input matInput placeholder="Пароль" type="password" formControlName="password">
     <mat-error *ngIf="loginForm.controls['password'].hasError('required')">
-      Password is <strong>required</strong>
+      Пароль <strong>обов'язковий</strong>
     </mat-error>
     <mat-error *ngIf="loginForm.controls['password'].hasError('minlength')">
-      Minimum 6 characters
+      Мінімум 6 символів
     </mat-error>
   </mat-form-field>
 
   <div mat-dialog-actions>
-    <button mat-raised-button type="reset" (click)="closeDialog($event)">Cancel</button>
-    <button mat-raised-button color="primary" type="submit">Login</button>
+    <button mat-raised-button type="reset" (click)="closeDialog($event)">Відмінити</button>
+    <button mat-raised-button color="primary" type="submit">Увійти</button>
   </div>
 
 </form>

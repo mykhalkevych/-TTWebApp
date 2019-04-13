@@ -2,9 +2,9 @@
   <div class="row">
     <div class="col-lg-9 col-md-8 col-sm-12">
       <div class="news">
-        <h2 class="mat-h2">News
+        <h2 class="mat-h2">Новини
           <button class="float-right" mat-stroked-button color="accent" [disabled]="!isUserLoggedIn"
-            (click)="openAddNewsDialog()"> Add News
+            (click)="openAddNewsDialog()"> Додати новину
           </button>
         </h2>
         <div *ngFor="let itemNews of news">
@@ -29,7 +29,7 @@
       </div>
     </div>
     <div class="col-lg-3 col-md-4 col-sm-12">
-      <h3 class="mat-h2">Players</h3>
+      <h3 class="mat-h2">Кращі гравці</h3>
       <mat-card>
         <mat-list>
           <mat-list-item *ngFor="let player of players; let i = index" [routerLink]="['player', player.id]">
@@ -40,7 +40,7 @@
           </mat-list-item>
         </mat-list>
       </mat-card>
-      <h3 class="mat-h2 mt-3">Last Games</h3>
+      <h3 class="mat-h2 mt-3">Останні ігри</h3>
       <mat-card>
         <div class="game-item" *ngFor="let game of games let i=index" [routerLink]="['games']">
           <div class="game-info">

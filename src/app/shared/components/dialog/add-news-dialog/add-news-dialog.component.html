@@ -1,13 +1,13 @@
 <form class="news-form row" [formGroup]="newsForm" novalidate (submit)="addNews()">
   <mat-form-field class="col-md-12">
-    <input matInput placeholder="News title" formControlName="title">
+    <input matInput placeholder="Заголовок" formControlName="title">
   </mat-form-field>
 
   <mat-form-field class="col-md-12">
-    <textarea [froalaEditor] matInput rows=5 placeholder="News text" formControlName="text"></textarea>
+    <textarea [froalaEditor] matInput rows=5 placeholder="Текст новини" formControlName="text"></textarea>
   </mat-form-field>
   <div mat-dialog-actions>
-      <button mat-raised-button (click)="closeDialog($event)">Cancel</button>
-      <button type="submit" mat-raised-button color="accent">Add News</button>
+      <button mat-raised-button (click)="closeDialog($event)">Відмінити</button>
+      <button type="submit" mat-raised-button color="accent">Додати новину</button>
     </div>
 </form>

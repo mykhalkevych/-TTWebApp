@@ -11,13 +11,15 @@ import { RegistrationDialogComponent } from './components/dialog/registration-di
 import { NewGameDialogComponent } from './components/dialog/new-game-dialog/new-game-dialog.component';
 import { AddNewsDialogComponent } from './components/dialog/add-news-dialog/add-news-dialog.component';
 import { FroalaEditorModule, FroalaViewModule } from 'angular-froala-wysiwyg';
+import { SettingDialogComponent } from './components/dialog/setting-dialog/setting-dialog.component';
 
 
 const SHARED_DIALOGS = [
   LoginDialogComponent,
   RegistrationDialogComponent,
   AddNewsDialogComponent,
-  NewGameDialogComponent
+  NewGameDialogComponent,
+  SettingDialogComponent
 ];
 
 @NgModule({

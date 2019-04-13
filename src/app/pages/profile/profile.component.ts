@@ -7,6 +7,7 @@ import { finalize } from 'rxjs/operators';
 import { LoadPlayer, UpdatePlayer } from 'src/app/store/actions/player.actions';
 import { Player } from 'src/app/models/player.model';
 import { UpdateAuthState } from 'src/app/store/actions/auth.action';
+import { awards } from 'src/app/shared/awards';
 
 @Component({
   selector: 'app-profile',
@@ -17,6 +18,7 @@ export class ProfileComponent implements OnInit {
 
   userInfo: User = {};
   playerInfo: Player = {};
+  awards = awards;
 
   constructor(
     private store: Store<AppState>,
@@ -24,6 +26,7 @@ export class ProfileComponent implements OnInit {
   ) {
     this.store.select(getCurrentUser)
       .subscribe((user: User) => {
+        console.log(user);
         this.userInfo = user;
         this.store.dispatch(new LoadPlayer(user.uid));
       });

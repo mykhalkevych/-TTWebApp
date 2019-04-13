@@ -1,6 +1,6 @@
 import { ProfileComponent } from './pages/profile/profile.component';
 import { NgModule } from '@angular/core';
-import { Routes, RouterModule } from '@angular/router';
+import { Routes, RouterModule, PreloadAllModules } from '@angular/router';
 import { HomeComponent } from './pages/home/home.component';
 import { RulesComponent } from './pages/rules/rules.component';
 import { PlayerDetailComponent } from './pages/player-detail/player-detail.component';
@@ -35,12 +35,13 @@ const routes: Routes = [
   },
   {
     path: 'profile',
-    component: ProfileComponent
+    component: ProfileComponent,
+    canActivate: [AuthGuard]
   }
 ];
 
 @NgModule({
-  imports: [RouterModule.forRoot(routes)],
+  imports: [RouterModule.forRoot(routes, { preloadingStrategy: PreloadAllModules})],
   exports: [RouterModule]
 })
 export class AppRoutingModule { }

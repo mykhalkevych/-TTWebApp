@@ -23,7 +23,8 @@ import {
   MatSlideToggleModule,
   MatAutocompleteModule,
   MatDatepickerModule,
-  MatNativeDateModule
+  MatNativeDateModule,
+  MatTooltipModule
 } from '@angular/material';
 
 const MATERIAL_COMPONENTS = [
@@ -48,7 +49,8 @@ const MATERIAL_COMPONENTS = [
   MatSlideToggleModule,
   MatAutocompleteModule,
   MatDatepickerModule,
-  MatNativeDateModule
+  MatNativeDateModule,
+  MatTooltipModule
 ];
 
 @NgModule({

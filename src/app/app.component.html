@@ -7,8 +7,8 @@
     <app-sidebar></app-sidebar>
   </mat-sidenav>
 
-  <div class="sidenav-content">
-    <router-outlet></router-outlet>
+  <div class="sidenav-content" [@fadeAnimation]="outlet.isActivated ? outlet.activatedRoute : ''">
+    <router-outlet #outlet="outlet"></router-outlet>
   </div>
 </mat-sidenav-container>
 
