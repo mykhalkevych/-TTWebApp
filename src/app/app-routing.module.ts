@@ -4,6 +4,8 @@ import { Routes, RouterModule } from '@angular/router';
 import { HomeComponent } from './pages/home/home.component';
 import { RulesComponent } from './pages/rules/rules.component';
 import { PlayerDetailComponent } from './pages/player-detail/player-detail.component';
+import { AuthGuard } from './guards/auth.guard';
+import { RoleGuard } from './guards/role.guard';
 
 const routes: Routes = [
   {
@@ -28,7 +30,8 @@ const routes: Routes = [
   },
   {
     path: 'admin',
-    loadChildren: './pages/admin/admin.module#AdminModule'
+    loadChildren: './pages/admin/admin.module#AdminModule',
+    canActivate: [RoleGuard]
   },
   {
     path: 'profile',

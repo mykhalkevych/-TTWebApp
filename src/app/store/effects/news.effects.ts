@@ -37,7 +37,7 @@ export class NewsEffects {
           );
       }));
 
-  @Effect({ dispatch: false })
+  @Effect()
   AddNews: Observable<any> = this.actions
     .pipe(
       ofType(NewsActionTypes.ADD_NEWS),
@@ -51,6 +51,16 @@ export class NewsEffects {
           .catch(error => {
             return new HandleError({ error: error });
           });
+      })
+    );
+  @Effect({ dispatch: false })
+  AddNewsSuccess: Observable<any> = this.actions
+    .pipe(
+      ofType(NewsActionTypes.ADD_NEWS_SUCCESS),
+      switchMap((action: AddNewsSuccess) => {
+        // this.store.dispatch(new StartLoading());
+        console.log(action.payload);
+        return of();
       })
     );
   @Effect({ dispatch: false })

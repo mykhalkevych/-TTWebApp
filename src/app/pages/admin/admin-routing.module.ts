@@ -1,11 +1,14 @@
+import { AuthGuard } from './../../guards/auth.guard';
 import { AdminComponent } from './admin.component';
 import { NgModule } from '@angular/core';
 import { Routes, RouterModule } from '@angular/router';
+import { RoleGuard } from 'src/app/guards/role.guard';
 
 const routes: Routes = [
   {
     path: '',
-    component: AdminComponent
+    component: AdminComponent,
+    canActivate: [RoleGuard]
   }
 ];
 

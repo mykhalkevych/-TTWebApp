@@ -1,3 +1,4 @@
+import { AddNewsDialogComponent } from '../../shared/components/dialog/add-news-dialog/add-news-dialog.component';
 import { Likes } from './../../models/news.model';
 import { User } from 'src/app/models/user.model';
 import { UpdateNews } from './../../store/actions/news.actions';
@@ -12,6 +13,8 @@ import { News } from 'src/app/models/news.model';
 import { LoadNews } from 'src/app/store/actions/news.actions';
 import { Game } from 'src/app/models/game.model';
 import { LoadGames } from 'src/app/store/actions/games.actions';
+import { MatDialog } from '@angular/material';
+import { DomSanitizer } from '@angular/platform-browser';
 
 @Component({
   selector: 'app-home',
@@ -29,7 +32,12 @@ export class HomeComponent implements OnInit, OnDestroy {
 
   playersSubscription: Subscription;
 
-  constructor(private store: Store<AppState>) { }
+  constructor(
+    private store: Store<AppState>,
+    public dialog: MatDialog,
+    public sanitizer: DomSanitizer
+    ) {
+     }
 
   ngOnInit() {
     this.store.dispatch(new LoadPlayers());
@@ -41,7 +49,7 @@ export class HomeComponent implements OnInit, OnDestroy {
         console.log(res);
         this.players = res;
       });
-      this.store.select(selectGames)
+    this.store.select(selectGames)
       .subscribe(res => {
         console.log(res);
         this.games = res;
@@ -49,7 +57,11 @@ export class HomeComponent implements OnInit, OnDestroy {
     this.store.select(selectNews)
       .subscribe(res => {
         console.log(res);
-        this.news = res;
+        this.news = res.reverse();
+        this.news = this.news.map(el => {
+          el.text = this.sanitizer.bypassSecurityTrustHtml(el.text);
+          return el;
+        });
       });
     this.store.select(getIsAuthenticated)
       .subscribe(res => {
@@ -93,6 +105,12 @@ export class HomeComponent implements OnInit, OnDestroy {
   dislikeNews(newsItem: News) {
     newsItem.dislikes = this.setLikeDislike(newsItem, 'dislikes', 'likes');
     this.store.dispatch(new UpdateNews(newsItem));
+  }
+
+  openAddNewsDialog() {
+    this.dialog.open(AddNewsDialogComponent, {
+      width: '600px'
+    });
   }
 
 }

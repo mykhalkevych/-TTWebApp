@@ -6,7 +6,9 @@ export interface Likes {
 export interface News {
   id: string;
   title: string;
-  text: string;
+  text: any;
+  published: boolean;
+  publisher:  string;
   likes: Array<Likes>;
   dislikes: Array<Likes>;
 }

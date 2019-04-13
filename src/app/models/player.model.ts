@@ -5,4 +5,5 @@ export interface Player {
   level?: number;
   avatar?: string;
   awards?: Array<number>;
+  role?: string;
 }

@@ -1,5 +1,6 @@
+import { User } from 'src/app/models/user.model';
 import { News } from './../../../../models/news.model';
-import { selectNews } from './../../../../store/app.states';
+import { selectNews, getCurrentUser } from './../../../../store/app.states';
 import { AddNews, LoadNews, UpdateNews, DeleteNews } from './../../../../store/actions/news.actions';
 import { FormBuilder, FormGroup, Validators } from '@angular/forms';
 import { Component, OnInit } from '@angular/core';
@@ -16,7 +17,7 @@ export class AdminNewsComponent implements OnInit {
   newsForm: FormGroup;
   news: Array<News> = [];
   isNewsEditing = false;
-
+  user: User;
   constructor(
     private fb: FormBuilder,
     private store: Store<AppState>
@@ -24,6 +25,7 @@ export class AdminNewsComponent implements OnInit {
     this.newsForm = this.fb.group({
       id: [new Date().getTime().toString(), Validators.required],
       title: ['', Validators.required],
+      publisher: [''],
       text: ['', Validators.required]
     });
   }
@@ -34,15 +36,22 @@ export class AdminNewsComponent implements OnInit {
       .subscribe(res => {
         this.news = res;
       });
+    this.store.select(getCurrentUser)
+      .subscribe(res => {
+        console.log(res);
+        this.user = res;
+      });
   }
 
   publishNews() {
     if (this.newsForm.valid) {
       const newsData = this.newsForm.value;
+      newsData.published = true;
       if (this.isNewsEditing) {
         this.store.dispatch(new UpdateNews(newsData));
         this.isNewsEditing = false;
       } else {
+        newsData.publisher = this.user.email;
         this.store.dispatch(new AddNews(newsData));
       }
       this.resetNewsForm();
@@ -59,7 +68,10 @@ export class AdminNewsComponent implements OnInit {
   }
 
   setNewsForm(news) {
-    this.newsForm.setValue(news);
+    console.log(news);
+    this.newsForm.controls['title'].setValue(news.title);
+    this.newsForm.controls['text'].setValue(news.text);
+    this.newsForm.controls['publisher'].setValue(news.publisher);
   }
 
   editNews(news) {

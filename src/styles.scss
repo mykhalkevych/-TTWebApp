@@ -4,35 +4,54 @@
 
 html,
 body {
-  height: 100%;
+    height: 100%;
 }
+
 body {
-  font-family: cursive;
-  *, .mat-h2 {
     font-family: cursive;
-  }
+
+    *,
+    .mat-h2,
+    .mat-menu-item,
+    .mat-dialog-title {
+        font-family: cursive;
+    }
 }
+
 a {
-  text-decoration: none;
-  color: inherit;
+    text-decoration: none;
+    color: inherit;
 }
-strong, b {
-  font-weight: bold;
+
+strong,
+b {
+    font-weight: bold;
 }
 
 button:focus {
-  outline: none;
+    outline: none;
 }
 
-.full-width{
-  width: 100%;
+img, iframe {
+  max-width: 100%;
+}
+
+.mat-option {
+    ::after, ::before {
+        box-sizing: content-box;
+    }
+}
+
+.full-width {
+    width: 100%;
 }
 
 /*Forms*/
-.popup-form{
-  width: 100%;
-  .mat-dialog-actions{
-    justify-content: flex-end;
-    margin-bottom: -12px;
-  }
+.popup-form {
+    width: 100%;
+
+    .mat-dialog-actions {
+        justify-content: flex-end;
+        margin-bottom: -12px;
+    }
 }
