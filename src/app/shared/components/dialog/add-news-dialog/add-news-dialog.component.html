@@ -3,11 +3,12 @@
     <input matInput placeholder="Заголовок" formControlName="title">
   </mat-form-field>
 
-  <mat-form-field class="col-md-12">
-    <textarea [froalaEditor] matInput rows=5 placeholder="Текст новини" formControlName="text"></textarea>
-  </mat-form-field>
+  <div class="col-md-12">
+    <quill-editor [style]="{height: '150px'}" [modules]="editorConfig" sanitize="false" [placeholder]="'Текст новини'"
+      formControlName="text"></quill-editor>
+  </div>
   <div mat-dialog-actions>
-      <button mat-raised-button (click)="closeDialog($event)">Відмінити</button>
-      <button type="submit" mat-raised-button color="accent">Додати новину</button>
-    </div>
+    <button mat-raised-button (click)="closeDialog($event)">Відмінити</button>
+    <button type="submit" mat-raised-button color="accent">Додати новину</button>
+  </div>
 </form>

@@ -17,11 +17,11 @@ export const awards = [
   },
   {
     icon: 'assets/images/6.png',
-    title: 'Заяняв 2 місце в чемпіонаті'
+    title: 'Зайняв 2 місце в чемпіонаті'
   },
   {
     icon: 'assets/images/9.png',
-    title: 'Заяняв 3 місце в чемпіонаті'
+    title: 'Зайняв 3 місце в чемпіонаті'
   },
   {
     icon: 'assets/images/1.png',

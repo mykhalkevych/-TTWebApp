@@ -18,6 +18,25 @@ export class AdminNewsComponent implements OnInit {
   news: Array<News> = [];
   isNewsEditing = false;
   user: User;
+  editorConfig = {
+    toolbar: [
+      ['bold', 'italic', 'underline', 'strike'],        // toggled buttons
+      ['blockquote', 'code-block'],
+      [{ 'list': 'ordered' }, { 'list': 'bullet' }],
+      [{ 'script': 'sub' }, { 'script': 'super' }],      // superscript/subscript
+
+      [{ 'size': ['small', false, 'large', 'huge'] }],  // custom dropdown
+      [{ 'header': [1, 2, 3, 4, 5, 6, false] }],
+
+      [{ 'color': [] }, { 'background': [] }],          // dropdown with defaults from theme
+      [{ 'font': [] }],
+      [{ 'align': [] }],
+
+      ['clean'],                                         // remove formatting button
+
+      ['link', 'image', 'video']                         // link and image, video
+    ]
+  };
   constructor(
     private fb: FormBuilder,
     private store: Store<AppState>

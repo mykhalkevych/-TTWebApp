@@ -5,4 +5,5 @@ export interface User {
   token?: string;
   displayName?: string;
   photoURL?: string;
+  emailVerified?: boolean;
 }

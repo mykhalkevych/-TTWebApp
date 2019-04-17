@@ -58,10 +58,10 @@ export class HomeComponent implements OnInit, OnDestroy {
       .subscribe(res => {
         console.log(res);
         this.news = res.reverse();
-        this.news = this.news.map(el => {
-          el.text = this.sanitizer.bypassSecurityTrustHtml(el.text);
-          return el;
-        });
+        // this.news = this.news.map(el => {
+        //   el.text = this.sanitizer.bypassSecurityTrustHtml(el.text);
+        //   return el;
+        // });
       });
     this.store.select(getIsAuthenticated)
       .subscribe(res => {

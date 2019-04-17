@@ -5,10 +5,10 @@
         <mat-form-field class="col">
           <input matInput placeholder="News title" formControlName="title">
         </mat-form-field>
-
-        <mat-form-field class="col">
-          <textarea [froalaEditor] matInput rows=5 placeholder="News text" formControlName="text"></textarea>
-        </mat-form-field>
+        <div>
+          <quill-editor [style]="{height: '150px'}" [modules]="editorConfig" [placeholder]="'Текст новини'"
+            formControlName="text"></quill-editor>
+        </div>
         <button type="submit" mat-raised-button color="accent">Publish</button>
       </form>
     </div>

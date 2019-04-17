@@ -3,6 +3,7 @@ import { AppState, getIsLoading } from 'src/app/store/app.states';
 import { Store } from '@ngrx/store';
 import { Component, OnInit, ViewEncapsulation } from '@angular/core';
 import { fadeAnimation } from './animations';
+import { MessagingService } from './services/messaging/messaging.service';
 
 @Component({
   selector: 'app-root',
@@ -14,12 +15,19 @@ import { fadeAnimation } from './animations';
 export class AppComponent implements OnInit {
   title = 'ttwebapp';
   isLoading: Observable<boolean>;
+  message;
+
   constructor(
-    private store: Store<AppState>
+    private store: Store<AppState>,
+    private messagingService: MessagingService
   ) {
 
   }
   ngOnInit() {
+    const userId = 'user001';
+    this.messagingService.requestPermission(userId);
+    this.messagingService.receiveMessage();
+    this.message = this.messagingService.currentMessage;
     const pagePreloader = document.querySelector('.page-preloader');
     setTimeout(() => {
       pagePreloader.classList.remove('loading');

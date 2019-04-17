@@ -15,6 +15,25 @@ export class AddNewsDialogComponent implements OnInit {
 
   newsForm: FormGroup;
   user: User;
+  editorConfig = {
+    toolbar: [
+      ['bold', 'italic', 'underline', 'strike'],        // toggled buttons
+      ['blockquote', 'code-block'],
+      [{ 'list': 'ordered' }, { 'list': 'bullet' }],
+      [{ 'script': 'sub' }, { 'script': 'super' }],      // superscript/subscript
+
+      [{ 'size': ['small', false, 'large', 'huge'] }],  // custom dropdown
+      [{ 'header': [1, 2, 3, 4, 5, 6, false] }],
+
+      [{ 'color': [] }, { 'background': [] }],          // dropdown with defaults from theme
+      [{ 'font': [] }],
+      [{ 'align': [] }],
+
+      ['clean'],                                         // remove formatting button
+
+      ['link', 'image', 'video']                         // link and image, video
+    ]
+  };
   constructor(
     private fb: FormBuilder,
     private store: Store<AppState>,
@@ -40,7 +59,7 @@ export class AddNewsDialogComponent implements OnInit {
       const newsData = this.newsForm.value;
       newsData.publisher = this.user.email;
       this.store.dispatch(new AddNews(newsData));
-      this.snackBar.open('У вас немає відповідних прав', 'Ok', {
+      this.snackBar.open('Дякуємо! Ваша новина буде опублікована після модерації адміном', 'Ok', {
         duration: 8000
       });
       this.dialogRef.close();

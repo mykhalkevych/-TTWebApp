@@ -10,7 +10,6 @@ import { AppComponent } from './app.component';
 import { HomeComponent } from './pages/home/home.component';
 import { StoreModule } from '@ngrx/store';
 import { SharedModule } from './shared/shared.module';
-import { FroalaEditorModule, FroalaViewModule } from 'angular-froala-wysiwyg';
 
 import { AngularFireModule } from '@angular/fire';
 import { AngularFireStorageModule } from '@angular/fire/storage';
@@ -26,6 +25,9 @@ import { SharedEffects } from './store/effects/shared.effects';
 import { PlayerDetailComponent } from './pages/player-detail/player-detail.component';
 import { ProfileComponent } from './pages/profile/profile.component';
 import { GameEffects } from './store/effects/game.effects';
+import { ServiceWorkerModule } from '@angular/service-worker';
+import { AngularFireDatabase } from '@angular/fire/database';
+import { AngularFireMessaging } from '@angular/fire/messaging';
 
 
 @NgModule({
@@ -48,8 +50,10 @@ import { GameEffects } from './store/effects/game.effects';
     AppRoutingModule,
     StoreModule.forRoot(reducers),
     EffectsModule.forRoot([AuthEffects, SharedEffects, PlayerEffects, NewsEffects, GameEffects]),
-    StoreDevtoolsModule.instrument()
+    StoreDevtoolsModule.instrument(),
+    ServiceWorkerModule.register('ngsw-worker.js', { enabled: environment.production })
   ],
-  bootstrap: [AppComponent]
+  bootstrap: [AppComponent],
+  providers: [AngularFireDatabase, AngularFireMessaging]
 })
 export class AppModule { }

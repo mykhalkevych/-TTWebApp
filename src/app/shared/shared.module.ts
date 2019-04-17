@@ -10,7 +10,7 @@ import { FormsModule, ReactiveFormsModule } from '@angular/forms';
 import { RegistrationDialogComponent } from './components/dialog/registration-dialog/registration-dialog.component';
 import { NewGameDialogComponent } from './components/dialog/new-game-dialog/new-game-dialog.component';
 import { AddNewsDialogComponent } from './components/dialog/add-news-dialog/add-news-dialog.component';
-import { FroalaEditorModule, FroalaViewModule } from 'angular-froala-wysiwyg';
+import { QuillModule } from 'ngx-quill';
 import { SettingDialogComponent } from './components/dialog/setting-dialog/setting-dialog.component';
 
 
@@ -37,8 +37,7 @@ const SHARED_DIALOGS = [
     MaterialModule,
     FormsModule,
     ReactiveFormsModule,
-    FroalaEditorModule,
-    FroalaViewModule
+    QuillModule
   ],
   entryComponents: [
     ...SHARED_DIALOGS
@@ -49,8 +48,7 @@ const SHARED_DIALOGS = [
     MaterialModule,
     FormsModule,
     ReactiveFormsModule,
-    FroalaEditorModule.forRoot(),
-    FroalaViewModule.forRoot()
+    QuillModule
   ]
 })
 export class SharedModule { }
