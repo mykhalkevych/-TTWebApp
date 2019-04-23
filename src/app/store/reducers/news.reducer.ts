@@ -1,4 +1,4 @@
-import { News } from '../../models/News.model';
+import { News } from '../../models/news.model';
 import { NewsActionTypes, NewsActions } from '../actions/news.actions';
 
 export interface State {
