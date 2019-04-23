@@ -19,7 +19,6 @@ export class RoleGuard implements CanActivate {
   canActivate() {
     return this.store.select(selectCurrentPlayer)
       .pipe(map(value => {
-        console.log(value);
         if (value.role === 'admin') {
           return true;
         } else {
