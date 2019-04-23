@@ -13,7 +13,6 @@ import { MessagingService } from './services/messaging/messaging.service';
   encapsulation: ViewEncapsulation.None
 })
 export class AppComponent implements OnInit {
-  title = 'ttwebapp';
   isLoading: Observable<boolean>;
   message;
 
@@ -24,6 +23,7 @@ export class AppComponent implements OnInit {
 
   }
   ngOnInit() {
+
     const userId = 'user001';
     this.messagingService.requestPermission(userId);
     this.messagingService.receiveMessage();
